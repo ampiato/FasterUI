@@ -22,3 +22,9 @@ jobs:
       - uses: actions/checkout@v4
       - name: Run build
         run: earthly --ci --push +all
+      - name: Run deploy
+        run: earthly --secret NETLIFY_AUTH_TOKEN --secret NETLIFY_SITE_ID --ci --push +deploy
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          
