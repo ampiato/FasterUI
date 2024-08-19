@@ -4,11 +4,13 @@ A framework for building beautiful UIs. Pronto!
 
 [Have a look at available components in our Storybook](https://ampiato-fasterui.netlify.app/storybook/?path=/docs/components-button--docs)
 
+[Or at the OpenAPI specs](https://ampiato-fasterui.netlify.app/openapi.html)
+
 ## TODOs
 
 - [ ] **Playground** 🛝 Side-by-side view with code editor and resulting UI where you can mess around.
 - [x] **Deploy Storybook** [Storybook](https://storybook.js.org) is a great way to test how each component could be configured.
-- [ ] **Deploy OpenAPI** OpenAPI serves as an interface specification between backend service and frontend. It would be nice to have an access to it from anywhere.
+- [x] **Deploy OpenAPI** OpenAPI serves as an interface specification between backend service and frontend. It would be nice to have an access to it from anywhere.
 - [ ] **Client library for ASP.NET** 
 - [ ] **Client library for C/C++**
 - [ ] **Client library for Java**
