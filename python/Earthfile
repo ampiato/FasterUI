@@ -18,7 +18,7 @@ code-quality:
     RUN ruff check .
     RUN ruff format --check .
 
-    
+
 wheel:
     COPY fasterui/ pyproject.toml mypy.ini ./
     RUN pip install build
@@ -32,7 +32,7 @@ openapi:
     SAVE ARTIFACT openapi.json
 
 
-all:
+ci:
     BUILD +code-quality
     BUILD +wheel
     BUILD +openapi
