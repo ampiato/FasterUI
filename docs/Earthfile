@@ -1,0 +1,14 @@
+VERSION 0.8
+FROM node:latest
+WORKDIR /code
+
+netlify:
+    ENV NEXT_DISABLE_NETLIFY_EDGE=true
+    RUN npm install netlify-cli -g
+
+deps:
+    FROM +netlify
+    COPY package.json .
+    RUN npm install
+    RUN npm install @netlify/plugin-nextjs --save-dev
+    COPY . .
