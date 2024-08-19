@@ -1,0 +1,43 @@
+VERSION 0.8
+FROM python:3
+WORKDIR /code
+
+
+build:
+    COPY fasterui ./fasterui/
+    COPY pyproject.toml mypy.ini ./
+    ENV PIP_ROOT_USER_ACTION=ignore
+    RUN python -m pip install -e .[openapi]
+
+
+code-quality:
+    FROM +build
+
+    RUN pip install mypy ruff
+    RUN mypy .
+    RUN ruff check .
+    RUN ruff format --check .
+
+    
+wheel:
+    COPY fasterui/ pyproject.toml mypy.ini ./
+    RUN pip install build
+    RUN python -m build
+    SAVE ARTIFACT dist/*.whl
+
+
+openapi:
+    FROM +build
+    RUN python -m fasterui generate
+    SAVE ARTIFACT openapi.json
+
+
+all:
+    BUILD +code-quality
+    BUILD +wheel
+    BUILD +openapi
+
+    COPY +wheel/*.whl ./
+    COPY +openapi/openapi.json ./
+
+    SAVE ARTIFACT *
