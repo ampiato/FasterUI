@@ -2,7 +2,7 @@
 package = "@netlify/plugin-nextjs"
 
 [build]
-command = "npm run build && cp -r public/storybook ./.next/storybook"
+command = "npm run build && cp -r public/* ./.next/"
 publish = ".next"
 
 [[redirects]]
