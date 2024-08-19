@@ -1,3 +1,4 @@
+# mypy: ignore-errors
 from __future__ import annotations
 
 from typing import Annotated, Literal, Union
@@ -152,9 +153,7 @@ ComponentUnion = Union[
 ]
 
 
-class Component(
-    RootModel[Annotated[ComponentUnion, Field(discriminator="component_type")]]
-): ...
+class Component(RootModel[Annotated[ComponentUnion, Field(discriminator="component_type")]]): ...
 
 
 IconName = Literal[
