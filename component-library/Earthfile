@@ -12,6 +12,6 @@ build:
     RUN npm run build
 
 storybook:
-    FROM +deps
+    FROM +build
     RUN npm run build:storybook
     SAVE ARTIFACT storybook-static
