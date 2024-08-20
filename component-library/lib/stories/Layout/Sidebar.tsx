@@ -1,6 +1,6 @@
 import { AmpiatoLogo } from '../Ampiato/AmpiatoLogo'
-import { Sidebar as Model } from '@/gen'
-import { RenderComponent } from '@/RenderComponent'
+import { Sidebar as Model } from '../../gen'
+import { RenderComponent } from '../../RenderComponent'
 
 
 /**

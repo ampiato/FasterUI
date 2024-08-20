@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Preview } from "@storybook/react";
-import '../src/index.css';
+import '../lib/index.css';
 
 import { withThemeByClassName } from "@storybook/addon-themes";
 import { LocalizationProvider } from '@mui/x-date-pickers';

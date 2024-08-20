@@ -9,7 +9,7 @@ import { Icon } from "./stories/Components/Icon";
 import { Markdown } from "./stories/Components/Markdown";
 import { NavigationButton } from "./stories/Components/NavigationButton";
 import { NavigationSection } from "./stories/Components/NavigationSection";
-import { Page } from '@/stories/Layout/Page'
+import { Page } from './stories/Layout/Page'
 import { PropertyCard } from "./stories/Components/PropertyCard";
 import { SectionHeader } from "./stories/Components/SectionHeader";
 import { Sidebar } from "./stories/Layout";

@@ -1,22 +1,36 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import { fileURLToPath, URL } from "url";
+import { defineConfig } from 'vite';
+import { resolve } from 'path';
+import react from '@vitejs/plugin-react';
+import dts from 'vite-plugin-dts';
+import tailwindcss from 'tailwindcss';
+import pkg from './package.json' assert { type: 'json' };
 
-
-
-// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
-  resolve: {
-    alias: [
-      { find: '@', replacement: fileURLToPath(new URL('./src', import.meta.url)) },
-      { find: '@gen', replacement: fileURLToPath(new URL('./src/gen', import.meta.url)) },
-    ]
+  plugins: [
+    react(),
+    dts({
+      rollupTypes: true,
+    }),
+  ],
+  build: {
+    lib: {
+      entry: resolve(__dirname, 'lib/main.ts'),
+      formats: ['es'],
+    },
+    rollupOptions: {
+      external: [...Object.keys(pkg.peerDependencies || {})],
+      output: {
+        globals: {
+          react: 'React',
+          'react-dom': 'ReactDOM',
+        },
+      },
+    },
+    sourcemap: true,
   },
-  server: {
-    proxy: {
-      '/api': 'http://localhost:8080'
-    }
-  }
-
-})
+  css: {
+    postcss: {
+      plugins: [tailwindcss],
+    },
+  },
+});

@@ -1,5 +1,5 @@
-import { FlexBox as Model } from "@/gen";
-import { RenderComponent } from "@/RenderComponent";
+import { FlexBox as Model } from "../../gen";
+import { RenderComponent } from "../..//RenderComponent";
 
 export const FlexBox: React.FC<Model> = ({ dir, gap, children }) => {
   let className = "flex";

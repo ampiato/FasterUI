@@ -1,5 +1,5 @@
-import { Grid as Model } from "@/gen"
-import { RenderComponent } from "@/RenderComponent"
+import { Grid as Model } from "../../gen"
+import { RenderComponent } from "../..//RenderComponent"
 
 
 export const Grid: React.FC<Model> = ({ cols, gapX, gapY, children }) => {

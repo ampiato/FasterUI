@@ -325,8 +325,8 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline'
 import React from 'react'
-import { IconComponentTypeEnum, Icon as Model } from '@/gen'
-import { classNames } from '@/utils';
+import { IconComponentTypeEnum, Icon as Model } from '../../gen'
+import { classNames } from '../../utils';
 
 const ICONS = {
   "AcademicCapIcon": AcademicCapIcon,

@@ -1,0 +1,93 @@
+import { ButtonGroup } from "../Components/ButtonGroup"
+import { DatePicker } from "../Components/DatePicker"
+import { FlexBox } from "../Components/FlexBox"
+import { Grid } from "../Components/Grid"
+import { SectionHeader } from "../Components/SectionHeader"
+import { Table } from "../Components/Table"
+import { Page } from "../Layout/Page"
+import { MenuProps, Sidebar } from "../Layout/Sidebar"
+
+let navigation: MenuProps[] = [
+  { name: 'Zařízení', href: '#', icon: "HomeIcon", current: false },
+  { name: 'Rozúčtování', href: '#', icon: "UsersIcon", current: true },
+  { name: 'Příprava nabídek', href: '#', icon: "FolderIcon", current: false },
+  { name: 'Automatická bidovací strategie', href: '#', icon: "CalendarIcon", current: false },
+  { name: 'Příprava provozu', href: '#', icon: "DocumentDuplicateIcon", current: false },
+  { name: 'Tržní data', href: '#', icon: "ChartPieIcon", current: false },
+]
+
+export const Settlement = () => {
+  let sidebar = <Sidebar
+    navigation={navigation}
+  />
+  return (
+    <Page sidebar={sidebar}>
+      <Grid cols={1} gapY={6}>
+        <SectionHeader
+          title="Rozúčtování"
+          subtitle="Detailní přehled rozúčtování podpůrných služeb na jednotlivá zařízení. Všechny platby jsou na základě těchto údajů."
+          rightSide={<FlexBox dir="horizontal" gap={2}>
+            <ButtonGroup names={["Po zařízeních", "Po subjektech"]} selected="Po zařízeních" />
+            <ButtonGroup names={["Hodinově", "Denní"]} selected="Hodinově" />
+          </FlexBox>}
+        />
+        <FlexBox dir="horizontal" gap={2}>
+          <DatePicker />
+        </FlexBox>
+        <Table
+          rowData={[
+            {
+              hour: "00:00 - 01:00",
+              contract: "aFRR+/DT",
+              device: "DG 1",
+              allocation: "8 MW",
+              qtyConfirmedByCeps: "8 MW",
+              price: "12,3 EUR/MWh",
+              devicePayment: "78,72 EUR",
+              margin: "19,68 EUR"
+            },
+            {
+              hour: "00:00 - 01:00",
+              contract: "aFRR-/DT",
+              device: "DG 1",
+              allocation: "5 MW",
+              qtyConfirmedByCeps: "5 MW",
+              price: "2,3 EUR/MWh",
+              devicePayment: "14,74 EUR",
+              margin: "3,68 EUR"
+            },
+            {
+              hour: "02:00 - 03:00",
+              contract: "aFRR+/DT",
+              device: "DG 2",
+              allocation: "2 MW",
+              qtyConfirmedByCeps: "2 MW",
+              price: "12,3 EUR/MWh",
+              devicePayment: "19,68 EUR",
+              margin: "4,92 EUR"
+            }
+          ]}
+          colDefs={[
+            { headerName: "Hodina", field: "hour" },
+            { headerName: "Kontrakt", field: "contract" },
+            { headerName: "Zařízení", field: "device" },
+            { headerName: "Alokace", field: "allocation" },
+            { headerName: "Uznaný výkon", field: "qtyConfirmedByCeps" },
+            { headerName: "Cena", field: "price" },
+            { headerName: "Platba zařízení", field: "devicePayment" },
+            { headerName: "Marže", field: "margin" },
+          ]}
+          autoSizeStrategy={{
+            type: "fitGridWidth",
+            columnLimits: [
+              {
+                colId: "duration",
+                minWidth: 300,
+              }
+            ]
+          }}
+        />
+      </Grid>
+    </Page>
+  )
+}
