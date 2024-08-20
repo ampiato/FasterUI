@@ -4,12 +4,19 @@ from textwrap import dedent
 
 import uvicorn
 from fastapi import FastAPI
-from fastapi.openapi.utils import get_openapi
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.openapi.utils import get_openapi
 
 import fasterui.components as c
 
-app = FastAPI()
+from .__version__ import __version__
+
+
+app = FastAPI(
+    title="FasterUI",
+    description="A framework for building beautiful UIs. Pronto!",
+    version=__version__,
+)
 
 app.add_middleware(
     CORSMiddleware,

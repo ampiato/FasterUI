@@ -8,9 +8,14 @@ ci:
 deploy-docs:
     FROM ./docs+deps
 
-    # BUILD ./component-library+storybook
     COPY ./component-library+storybook/storybook-static ./public/storybook
     COPY ./python+openapi/openapi.json ./public/openapi.json
 
     RUN --secret NETLIFY_AUTH_TOKEN --secret NETLIFY_SITE_ID netlify build --context production
     RUN --push --secret NETLIFY_AUTH_TOKEN --secret NETLIFY_SITE_ID netlify deploy --prod
+
+deploy:
+    ARG version
+
+    BUILD ./python+deploy --version $version
+    BUILD ./component-library+deploy --version $version

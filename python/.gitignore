@@ -1,4 +1,7 @@
 **/__pycache__
 **/*.pyc
 .venv
-fasterui.egg-info/
+fasterui.egg-info
+.ruff_cache
+.mypy_cache
+__pycache__
