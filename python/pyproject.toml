@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "fasterui"
-dependencies = ["pydantic>=2.0"]
+dependencies = ["pydantic>=2.0", "fastapi>=0.112", "uvicorn>=0.30"]
 requires-python = ">=3.8"
 authors = [{ name = "Tomas Krejci", email = "tomas.krejci@ampiato.com" }]
 description = "FasterUI is a Python library for building user interfaces. Pronto."
@@ -12,9 +12,6 @@ dynamic = ["version"]
 
 [tool.setuptools.dynamic]
 version = {attr = "fasterui.__version__"}
-
-[project.optional-dependencies]
-openapi = ["fastapi>=0.112", "uvicorn>=0.30"]
 
 [project.scripts]
 fasterui = "fasterui:__main__.main"
