@@ -22,13 +22,14 @@ app.add_middleware(
 
 @app.get("/simple.json")
 async def simple() -> c.Component:
-    return c.FlexBox(
-        dir="vertical",
-        gap=4,
-        children=[
-            c.SectionHeader(title="FasterUI", subtitle="A framework for building beautiful UIs. Pronto!"),
-            c.Markdown(
-                markdown=dedent("""
+    return c.Component(
+        c.FlexBox(
+            dir="vertical",
+            gap=4,
+            children=[
+                c.SectionHeader(title="FasterUI", subtitle="A framework for building beautiful UIs. Pronto!"),
+                c.Markdown(
+                    markdown=dedent("""
                 ## Getting Started
 
                 See our [documentation](https://ampiato-fasterui.netlify.app/).
@@ -38,8 +39,9 @@ async def simple() -> c.Component:
                 Or check out our [GitHub](https://github.com/ampiato/FasterUI)
 
                 """)
-            ),
-        ],
+                ),
+            ],
+        )
     )
 
 
