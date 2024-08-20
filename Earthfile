@@ -38,7 +38,7 @@ deploy-python:
     COPY +artifacts/openapi.json ./
     
     RUN pip install twine
-    RUN --secret TWINE_PASSWORD twine upload --non-interactive -u __token__ --repository pypi dist/*.whl
+    RUN --secret TWINE_PASSWORD twine upload --non-interactive -u __token__ --repository pypi fasterui-$version-py3-none-any.whl
 
 deploy-component-library:
     ARG version
