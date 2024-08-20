@@ -14,6 +14,8 @@ on:
 jobs:
   earthly:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - uses: earthly/actions-setup@v1
