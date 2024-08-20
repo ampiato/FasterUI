@@ -36,7 +36,7 @@ jobs:
               --secret NETLIFY_SITE_ID \
               --secret NPM_PUBLSH_KEY \
               --secret TWINE_PASSWORD \
-              --ci --push +ci --version $RELEASE_VERSION
+              --ci --push +deploy --version $RELEASE_VERSION
           else
             earthly \
               --artifact '+artifacts/*' ./dist/ \
