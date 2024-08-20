@@ -1,6 +1,5 @@
 {
-  "name": "fasterui",
-  "private": true,
+  "name": "@ampiato/fasterui",
   "version": "0.1.0",
   "type": "module",
   "main": "dist/fasterui.umd.cjs",
@@ -23,7 +22,7 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build:storybook": "storybook build --disable-telemetry",
-    "postbuild:storybook": "sed -i 's|<head>|<head>\\n<base href=\"/storybook/\">|' ./storybook-static/index.html"
+    "postbuild:storybook": "sed 's|<head>|<head>\\n<base href=\"/storybook/\">|' ./storybook-static/index.html"
   },
   "peerDependencies": {
     "@emotion/react": "^11.13.0",

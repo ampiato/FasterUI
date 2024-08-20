@@ -2,6 +2,8 @@ VERSION 0.8
 FROM python:3
 WORKDIR /code
 
+sources:
+    COPY . .
 
 build:
     COPY fasterui ./fasterui/
@@ -20,7 +22,7 @@ code-quality:
 
 
 wheel:
-    COPY fasterui/ pyproject.toml mypy.ini ./
+    FROM +sources
     RUN pip install build
     RUN python -m build
     SAVE ARTIFACT dist/*.whl
@@ -41,3 +43,17 @@ ci:
     COPY +openapi/openapi.json ./
 
     SAVE ARTIFACT *
+
+deploy:
+    FROM +sources
+    ARG version
+
+    RUN echo "__version__ = '$version'" > fasterui/__version__.py
+    RUN pip install build twine
+    RUN python -m pip install -e .[openapi]
+    RUN python -m build
+    RUN python -m fasterui generate
+    RUN --secret TWINE_PASSWORD twine upload --non-interactive -u __token__ --repository pypi dist/*.whl
+
+    SAVE ARTIFACT dist/*.whl
+    SAVE ARTIFACT openapi.json

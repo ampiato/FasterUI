@@ -2,17 +2,17 @@
 title: Getting started
 ---
 
-Learn how to get CacheAdvance set up in your project in under thirty minutes or it's free. {% .lead %}
+Learn how to get FasterUI up and running in your project.{% .lead %}
 
 {% quick-links %}
 
-{% quick-link title="Installation" icon="installation" href="/" description="Step-by-step guides to setting up your system and installing the library." /%}
+{% quick-link title="" icon="installation" href="/" description="Step-by-step guides to setting up your system and installing the library." /%}
 
 {% quick-link title="Architecture guide" icon="presets" href="/" description="Learn how the internals work and contribute." /%}
 
-{% quick-link title="Plugins" icon="plugins" href="/" description="Extend the library with third-party plugins or write your own." /%}
+{% quick-link title="Storybook" icon="plugins" href="/" description="Have a look at available components and configure them." /%}
 
-{% quick-link title="API reference" icon="theming" href="/" description="Learn to easily customize and modify your app's visual design to fit your brand." /%}
+{% quick-link title="OpenAPI spec" icon="theming" href="/" description="Specification of the structures you need to provide in order to render the GUI." /%}
 
 {% /quick-links %}
 

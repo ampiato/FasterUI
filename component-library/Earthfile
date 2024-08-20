@@ -15,3 +15,13 @@ storybook:
     FROM +build
     RUN npm run build:storybook
     SAVE ARTIFACT storybook-static
+
+  
+deploy:
+    FROM +deps
+    ARG version
+
+    RUN npm version $version
+    RUN npm run build
+    RUN --secret NPM_PUBLSH_KEY npm config set //registry.npmjs.org/:_authToken=$NPM_PUBLSH_KEY
+    RUN npm publish

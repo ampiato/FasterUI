@@ -3,6 +3,8 @@ name: Earthly CI/CD
 on:
   push:
     branches: [ main ]
+    tags:
+      - '*'
   pull_request:
     branches: [ main ]
   
@@ -26,15 +28,23 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: build
-    # if: github.ref == 'refs/heads/main'
+    if: contains(github.ref, 'release')
 
     steps:
       - uses: earthly/actions-setup@v1
         with:
           version: v0.8.0
       - uses: actions/checkout@v4
-      - name: Run deploy
+      - name: Run deploy-docs
         run: earthly --secret NETLIFY_AUTH_TOKEN --secret NETLIFY_SITE_ID --ci --push +deploy-docs
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+
+      - name: Run deploy
+        run: |
+          RELEASE_VERSION=${GITHUB_REF#refs/*/}
+          earthly --secret NPM_PUBLSH_KEY --secret TWINE_PASSWORD --ci --push +deploy --version $RELEASE_VERSION
+        env:
+          NPM_PUBLSH_KEY: ${{ secrets.NPM_PUBLSH_KEY }}
+          TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}
