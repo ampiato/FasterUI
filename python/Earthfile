@@ -3,57 +3,45 @@ FROM python:3
 WORKDIR /code
 
 sources:
-    COPY . .
+    ARG version
+    ENV PIP_ROOT_USER_ACTION=ignore
+
+    COPY fasterui/ fasterui
+    COPY pyproject.toml mypy.ini .
+    RUN echo "__version__ = \"$version\"" > fasterui/__version__.py
+
+wheel:
+    ARG version
+    FROM +sources --version $version
+
+    RUN pip install build
+    RUN python -m build
+    SAVE ARTIFACT dist/fasterui-$version-py3-none-any.whl AS LOCAL dist/
 
 build:
-    COPY fasterui ./fasterui/
-    COPY pyproject.toml mypy.ini ./
-    ENV PIP_ROOT_USER_ACTION=ignore
-    RUN python -m pip install -e .[openapi]
+    ARG version
+    FROM +wheel --version $version
+    COPY +wheel/*.whl .
+    RUN python -m pip install *.whl
 
-
-code-quality:
+openapi:
     FROM +build
 
+    RUN python -m fasterui generate
+    SAVE ARTIFACT openapi.json
+
+code-quality:
+    ARG version
+    FROM +sources --version $version
+
+    RUN pip install -e .
     RUN pip install mypy ruff
     RUN mypy .
     RUN ruff check .
     RUN ruff format --check .
 
 
-wheel:
-    FROM +sources
-    RUN pip install build
-    RUN python -m build
-    SAVE ARTIFACT dist/*.whl
-
-
-openapi:
-    FROM +build
-    RUN python -m fasterui generate
-    SAVE ARTIFACT openapi.json
-
-
 ci:
-    BUILD +code-quality
-    BUILD +wheel
-    BUILD +openapi
-
-    COPY +wheel/*.whl ./
-    COPY +openapi/openapi.json ./
-
-    SAVE ARTIFACT *
-
-deploy:
-    FROM +sources
     ARG version
 
-    RUN echo "__version__ = '$version'" > fasterui/__version__.py
-    RUN pip install build twine
-    RUN python -m pip install -e .[openapi]
-    RUN python -m build
-    RUN python -m fasterui generate
-    RUN --secret TWINE_PASSWORD twine upload --non-interactive -u __token__ --repository pypi dist/*.whl
-
-    SAVE ARTIFACT dist/*.whl
-    SAVE ARTIFACT openapi.json
+    BUILD +code-quality --version $version

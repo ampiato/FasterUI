@@ -1,27 +1,28 @@
 VERSION 0.8
-FROM node:latest
+FROM node:22.6.0-bookworm-slim
 WORKDIR /code
 
 deps:
+    ARG version
     COPY package.json ./
     RUN npm install
-    COPY . .
+    COPY --dir .storybook lib public eslint.config.js index.html package.json postcss.config.js README.md tailwind.config.js tsconfig.json tslint.json vite.config.ts .
+    RUN npm version --allow-same-version $version
 
 build:
-    FROM +deps
+    ARG version
+    FROM +deps --version $version
     RUN npm run build
 
 storybook:
-    FROM +build
+    ARG version
+    FROM +build --version $version
     RUN npm run build:storybook
-    SAVE ARTIFACT storybook-static
+    SAVE ARTIFACT storybook-static/ AS LOCAL storybook-static/
 
-  
-deploy:
-    FROM +deps
+ci:
     ARG version
 
-    RUN npm version $version
-    RUN npm run build
-    RUN --secret NPM_PUBLSH_KEY npm config set //registry.npmjs.org/:_authToken=$NPM_PUBLSH_KEY
-    RUN npm publish
+    BUILD +build --version $version
+
+
