@@ -42,7 +42,7 @@ deploy-python:
 
 deploy-component-library:
     ARG version
-    FROM ./component-library+build
+    FROM ./component-library+build --version $version
 
     RUN --secret NPM_PUBLSH_KEY npm config set //registry.npmjs.org/:_authToken=$NPM_PUBLSH_KEY
     RUN npm publish
