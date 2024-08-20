@@ -1,5 +1,5 @@
-import { classNames } from '@/utils'
-import { PropertyCard as Model } from '@/gen'
+import { classNames } from '../../utils'
+import { PropertyCard as Model } from '../../gen'
 
 
 export const PropertyCard: React.FC<Model> = ({ title, keyValuePairs, condensed, href, isActive }) => {

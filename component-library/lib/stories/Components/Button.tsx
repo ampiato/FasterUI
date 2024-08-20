@@ -1,7 +1,7 @@
-import { Button as Model } from '@/gen';
+import { Button as Model } from '../../gen';
 
 import './button.css';
-import { classNames } from '@/utils';
+import { classNames } from '../../utils';
 
 
 export const Button: React.FC<Model> = ({

@@ -1,5 +1,5 @@
-import { ButtonGroup as Model } from "@/gen"
-import { classNames } from "@/utils"
+import { ButtonGroup as Model } from "../../gen"
+import { classNames } from "../../utils"
 
 export const ButtonGroup: React.FC<Model> = ({ items }) => {
   return (

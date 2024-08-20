@@ -1,5 +1,5 @@
 import { Marked, Renderer } from '@ts-stack/markdown';
-import { Markdown as Model } from '@/gen';
+import { Markdown as Model } from '../../gen';
 
 Marked.setOptions({
   renderer: new Renderer,

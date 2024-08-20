@@ -1,5 +1,5 @@
-import { Component, NavigationSection as Model } from "@/gen"
-import { RenderComponent } from "@/RenderComponent"
+import { Component, NavigationSection as Model } from "../../gen"
+import { RenderComponent } from "../../RenderComponent"
 
 export const NavigationSection: React.FC<Model> = ({ title, children }) => {
   return (

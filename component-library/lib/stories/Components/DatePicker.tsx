@@ -1,4 +1,4 @@
-import { DatePicker as Model } from '@/gen';
+import { DatePicker as Model } from '../../gen';
 import { DatePicker as DatePickerMUI } from '@mui/x-date-pickers';
 import dayjs from 'dayjs';
 

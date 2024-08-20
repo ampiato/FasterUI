@@ -1,5 +1,5 @@
-import { NavigationButton as Model } from '@/gen';
-import { classNames } from '@/utils';
+import { NavigationButton as Model } from '../../gen';
+import { classNames } from '../../utils';
 import { Icon } from './Icon';
 
 

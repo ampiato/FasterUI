@@ -1,0 +1,111 @@
+import { Button } from "../Components/Button"
+import { Grid } from "../Components/Grid"
+import { Markdown } from "../Components/Markdown"
+import { PropertyCard } from "../Components/PropertyCard"
+import { SectionHeader } from "../Components/SectionHeader"
+import { Table } from "../Components/Table"
+import { Page } from "../Layout/Page"
+import { MenuProps, Sidebar } from "../Layout/Sidebar"
+
+let navigation: MenuProps[] = [
+  { name: 'Zařízení', href: '#', icon: "HomeIcon", current: true },
+  { name: 'Rozúčtování', href: '#', icon: "UsersIcon", current: false },
+  { name: 'Příprava nabídek', href: '#', icon: "FolderIcon", current: false },
+  { name: 'Automatická bidovací strategie', href: '#', icon: "CalendarIcon", current: false },
+  { name: 'Příprava provozu', href: '#', icon: "DocumentDuplicateIcon", current: false },
+  { name: 'Tržní data', href: '#', icon: "ChartPieIcon", current: false },
+]
+
+let devices = [
+  { name: "Diesel agregát 1", owner: "Jiří Novák", service: "Enext" },
+  { name: "Diesel agregát 2", owner: "Filip Matzner", service: "Enext" },
+  { name: "Diesel agregát 3", owner: "Kamil Gregůrek", service: "Enext" },
+  { name: "Diesel agregát 4", owner: "Lubomír Novák", service: "Enext" },
+  { name: "Kogenerace 5", owner: "Karel Svoboda", service: "Enext" },
+]
+
+export const Devices = () => {
+  let sidebar = <Sidebar navigation={navigation} />
+  return (
+    <Page sidebar={sidebar}>
+      <Grid cols={1} gapY={6}>
+        <SectionHeader title="Zařízení" />
+        <Grid cols={3} gapX={4} gapY={4}>
+          {devices.map((device, index) => (
+            <PropertyCard condensed key={index} title={device.name} keyValuePairs={[{ key: "Vlastník", value: device.owner }, { key: "Provozovatel", value: device.service }]} />
+          ))}
+        </Grid>
+        <SectionHeader title="Diesel agregát 1" subtitle="DG1" rightSide={<Button label="Upravit veličiny" />} />
+        <Grid cols={2}>
+          <Markdown>
+            {`Vlastník: **Jiří Novák**
+Provozovatel: **Enext**
+Typ: **Jenbacher JGC 620 GS-N.LC**
+Elektrický výkon: **3 352 kW**`}
+          </Markdown>
+          <Markdown>
+            {`Přidáno: **1. 1. 2024**
+Způsob rozúčtování: **Podle množství vyrobené elektřiny**
+Marže obchodníka: **16%**`}
+          </Markdown>
+        </Grid>
+        <SectionHeader
+          title="Tržby"
+          subtitle="Stručný přehled rozúčtování zařízení. Podrobnější informace nalezneet v sekci Rozúčtování."
+        />
+        <Table
+          rowData={[
+            { month: "Leden", availability: "90%", revenue: "1 563 234 Kč", costs: "34 325 Kč", engineHours: "43 hodin" },
+            { month: "Únor", availability: "100%", revenue: "1 234 964 Kč", costs: "76 325 Kč", engineHours: "18 hodin" },
+            { month: "Březen", availability: "100%", revenue: "1 234 964 Kč", costs: "76 325 Kč", engineHours: "18 hodin" },
+            { month: "Duben", availability: "100%", revenue: "1 234 964 Kč", costs: "76 325 Kč", engineHours: "18 hodin" },
+            { month: "Květen", availability: "100%", revenue: "1 234 964 Kč", costs: "76 325 Kč", engineHours: "18 hodin" },
+          ]}
+          colDefs={[
+            { headerName: "Měsíc", field: "month" },
+            { headerName: "Dostupnost", field: "availability" },
+            { headerName: "Tržby", field: "revenue" },
+            { headerName: "Náklady", field: "costs" },
+            { headerName: "Motohodiny", field: "engineHours" },
+          ]}
+          autoSizeStrategy={{
+            type: "fitGridWidth",
+          }}
+        />
+        <SectionHeader
+          title="Odstávky"
+          subtitle="Odstávky jsou dočasné částečné nebo úplné snížení výkonu zařízení. Mohou být plánované, nebo výpadky."
+          rightSide={<Button label="Zadat odstávku" />}
+        />
+        <Table
+          rowData={[
+            { duration: "1. 1. 2024 00:42 - 1. 1. 2024 15:00", type: "Výpadek", qty: "úplná odstávka", author: "Tomáš Krejčí", lostRevenue: "43 323 Kč" },
+            { duration: "5. 2. 2024 00:00  - 6. 2. 2024 00:00", type: "Údržba", qty: "2 MW", author: "Jiří Novák", lostRevenue: "7 453 Kč" },
+          ]}
+          colDefs={[
+            { headerName: "Od - do", field: "duration" },
+            { headerName: "Typ", field: "type" },
+            { headerName: "Velikost", field: "qty" },
+            { headerName: "Zadal", field: "author" },
+            { headerName: "Odhad ušlých tržeb", field: "lostRevenue" },
+            {
+              headerName: "Akce",
+              cellRenderer: () => {
+                return <Button label="Odstranit" size="small" />
+              }
+            },
+          ]}
+          autoSizeStrategy={{
+            type: "fitGridWidth",
+            columnLimits: [
+              {
+                colId: "duration",
+                minWidth: 300,
+              }
+            ]
+          }}
+        />
+      </Grid>
+    </Page>
+  )
+}

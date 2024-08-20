@@ -1,0 +1,30 @@
+import { Button } from "../Components/Button"
+import { SectionHeader } from "../Components/SectionHeader"
+import { Page } from "../Layout/Page"
+import { MenuProps, Sidebar } from "../Layout/Sidebar"
+
+let navigation: MenuProps[] = [
+  { name: 'Zařízení', href: '#', icon: "HomeIcon", current: false },
+  { name: 'Rozúčtování', href: '#', icon: "UsersIcon", current: false },
+  { name: 'Příprava nabídek', href: '#', icon: "FolderIcon", current: true },
+  { name: 'Automatická bidovací strategie', href: '#', icon: "CalendarIcon", current: false },
+  { name: 'Příprava provozu', href: '#', icon: "DocumentDuplicateIcon", current: false },
+  { name: 'Tržní data', href: '#', icon: "ChartPieIcon", current: false },
+]
+
+export const Offers = () => {
+  let sidebar = <Sidebar
+    navigation={navigation}
+  />
+  return (
+    <Page sidebar={sidebar}>
+      <SectionHeader
+        title="Příprava nabídek"
+        subtitle="Příprava a odesílání nabídek na rezervaci výkonu na denní trh PpS"
+        rightSide={
+          <Button label="Odeslat nabíky" />
+        }
+      />
+    </Page>
+  )
+}

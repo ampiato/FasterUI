@@ -1,5 +1,5 @@
-import { SectionHeader as Model } from "@/gen"
-import { RenderComponent } from "@/RenderComponent"
+import { SectionHeader as Model } from "../../gen"
+import { RenderComponent } from "../../RenderComponent"
 
 export const SectionHeader: React.FC<Model> = ({ title, subtitle, children }) => {
   return (

@@ -15,8 +15,8 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
-import { Page as Model } from '@/gen'
-import { RenderComponent } from '@/RenderComponent'
+import { Page as Model } from '../../gen'
+import { RenderComponent } from '../../RenderComponent'
 
 const userNavigation = [
   { name: 'Your profile', href: '#' },
