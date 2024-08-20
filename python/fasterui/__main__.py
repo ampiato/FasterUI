@@ -1,18 +1,48 @@
 import argparse
 import json
+from textwrap import dedent
 
 import uvicorn
 from fastapi import FastAPI
 from fastapi.openapi.utils import get_openapi
+from fastapi.middleware.cors import CORSMiddleware
 
 import fasterui.components as c
 
 app = FastAPI()
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
-@app.get("/dummy.json")
-async def script() -> c.Component:
-    raise Exception("This is a dummy endpoint")
+
+@app.get("/simple.json")
+async def simple() -> c.Component:
+    return c.Component(
+        c.FlexBox(
+            dir="vertical",
+            gap=4,
+            children=[
+                c.SectionHeader(title="FasterUI", subtitle="A framework for building beautiful UIs. Pronto!"),
+                c.Markdown(
+                    markdown=dedent("""
+                ## Getting Started
+
+                See our [documentation](https://ampiato-fasterui.netlify.app/).
+
+                Have a look at various [components](https://ampiato-fasterui.netlify.app/storybook).
+                
+                Or check out our [GitHub](https://github.com/ampiato/FasterUI)
+
+                """)
+                ),
+            ],
+        )
+    )
 
 
 def main():
