@@ -15,10 +15,18 @@ spec:
     - host: fasterui.ampiato.com
       http:
         paths:
-          - path: /
+          - path: /api
             pathType: Prefix
             backend:
               service:
                 name: {{ .Release.Name }}-server
                 port:
                   number: 8000
+
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Release.Name }}-docs
+                port:
+                  number: 3000
