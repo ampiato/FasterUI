@@ -38,6 +38,9 @@ app = FastAPI(
         "identifier": "MIT",
     },
     openapi_tags=tags_metadata,
+    openapi_url="/api/openapi.json",
+    docs_url="/api/docs", 
+    redoc_url=None
 )
 
 app.add_middleware(
@@ -49,7 +52,7 @@ app.add_middleware(
 )
 
 
-@app.get("/examples", tags=["examples"])
+@app.get("/api/examples", tags=["examples"])
 def list_of_examples() -> dict:
     """Get a list of examples."""
     res = []
@@ -61,7 +64,7 @@ def list_of_examples() -> dict:
     return {"examples": res}
 
 
-@app.get("/examples/{id}/component.json", tags=["examples"], responses={200: {"model": c.Component}, 422: {"model": str}}, response_model_exclude_none=True)
+@app.get("/api/examples/{id}/component.json", tags=["examples"], responses={200: {"model": c.Component}, 422: {"model": str}}, response_model_exclude_none=True)
 def example(id: str) -> c.Component:
     if not hasattr(examples, id):
         raise HTTPException(status_code=404, detail="Example not found")
@@ -80,7 +83,7 @@ def main():
     args = parser.parse_args()
 
     if args.command == "server":
-        print("Documentation is available at http://localhost:8000/docs")
+        print("Documentation is available at http://localhost:8000/api/docs")
         uvicorn.run(app, host="0.0.0.0", port=8000)
     elif args.command == "generate":
         with open("openapi.json", "w") as f:
