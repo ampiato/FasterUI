@@ -15,7 +15,7 @@ echo -e "${GREEN}${BOLD}Deploying ...${RESET}"
 
 # helm get values fasterui -o yaml -n fasterui > debug_fasterui_values_deployed.yml
 # TAG=$(yq -r .ampdata.tag debug_fasterui_values_deployed.yml)
-TAG="0.1.9"
+TAG="0.1.12"
 
 echo -e "${GREEN}${BOLD}Deploying fasterui ...${RESET}"
 echo -e "${GREEN}${BOLD} - AmpData tag: ${TAG}${RESET}"
