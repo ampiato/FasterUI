@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}-server
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-production-issuer
+    nginx.ingress.kubernetes.io/proxy-body-size: 1024m
+spec:
+  ingressClassName: nginx
+  tls: 
+  - hosts:
+    - fasterui.ampiato.com
+    secretName: {{ .Release.Name }}-production-cert
+  rules:
+    - host: fasterui.ampiato.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Release.Name }}-server
+                port:
+                  number: 8000
