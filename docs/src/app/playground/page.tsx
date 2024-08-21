@@ -1,16 +1,14 @@
 "use client";
 
-import Editor, { Monaco, OnValidate } from "@monaco-editor/react";
+import { RadioCards } from "@/components/RadioCards";
+import { Component, ComponentFromJSON, RenderComponent } from "@ampiato/fasterui";
+import "@ampiato/fasterui/style.css";
+import Editor, { Monaco, OnMount, OnValidate } from "@monaco-editor/react";
+import clsx from "clsx";
 import { useEffect, useRef, useState } from "react";
 
-import { Component, ComponentFromJSON, RenderComponent } from "@ampiato/fasterui"
-
-import schema from "./fasterui.json"
-import "@ampiato/fasterui/style.css"
-import { ButtonGroup } from "@/components/ButtonGroup";
-import { RadioCards } from "@/components/RadioCards";
-import clsx from "clsx";
 import { ExamplesRadio } from "./examples_radio";
+import schema from "./fasterui.json";
 
 function editorWillMount(monaco: Monaco) {
   monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
@@ -28,6 +26,7 @@ function editorWillMount(monaco: Monaco) {
 }
 
 type MarkersType = Parameters<OnValidate>[0];
+type IStandaloneCodeEditor = Parameters<OnMount>[0];
 
 const RenderMarkers = ({ markers }: { markers: MarkersType }) => {
   return (
@@ -59,7 +58,7 @@ export default function Page() {
   const [problems, setProblems] = useState<MarkersType>([]);
   const [component, setComponent] = useState<Component | undefined>(ComponentFromJSON(DEFAULT_JSON));
   const [layout, setLayout] = useState<"full-width" | "centered">("full-width");
-  const editorRef = useRef(null);
+  const editorRef = useRef<IStandaloneCodeEditor | null>(null);
 
   const handleEditorValidate: OnValidate = (markers) => {
     setProblems(markers);
@@ -80,12 +79,14 @@ export default function Page() {
   }, [problems, editorContent]);
 
   const onExampleSelect = (id: string, layout: "full-width" | "centered") => {
-    fetch(`http://localhost:8000/examples/${id}/component.json`)
+    fetch(`https://fasterui.ampiato.com/api/examples/${id}/component.json`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(layout, data);
-        if (editorRef.current) {
-          editorRef.current!.getModel().setValue(JSON.stringify(data, null, 2));
+        const editor = editorRef.current;
+
+        if (editor !== null) {
+          // @ts-ignore
+          editor.getModel().setValue(JSON.stringify(data, null, 2));
           setLayout(layout);
         }
       })

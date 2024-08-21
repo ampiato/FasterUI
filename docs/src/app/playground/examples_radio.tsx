@@ -12,7 +12,7 @@ export const ExamplesRadio: React.FC<Props> = ({onSelect}) => {
   const [isLoading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetch('http://localhost:8000/examples')
+    fetch('https://fasterui.ampiato.com/api/examples')
       .then((res) => res.json())
       .then((data) => {
         setData(data)
