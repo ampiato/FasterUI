@@ -55,7 +55,7 @@ export function Hero() {
                 Never again mess with CSS classes and Javascript. Simply provide a JSON-like description of your UI and let FasterUI do the rest.
               </p>
               <div className="mt-8 flex gap-4 md:justify-center lg:justify-start">
-                <Button href="/docs/quick-start">Quick start</Button>
+                <Button href="/playground">Playground</Button>
                 <Button href="https://github.com/ampiato/FasterUI" variant="secondary">
                   View on GitHub
                 </Button>

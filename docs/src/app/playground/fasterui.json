@@ -1,0 +1,1245 @@
+{
+  "$defs": {
+    "Button": {
+      "properties": {
+        "component_type": {
+          "const": "Button",
+          "default": "Button",
+          "enum": [
+            "Button"
+          ],
+          "title": "Component Type",
+          "type": "string"
+        },
+        "primary": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": false,
+          "title": "Primary"
+        },
+        "size": {
+          "default": null,
+          "enum": [
+            "small",
+            "medium",
+            "large"
+          ],
+          "title": "Size",
+          "type": "string"
+        },
+        "href": {
+          "default": null,
+          "title": "Href",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        }
+      },
+      "required": [
+        "label"
+      ],
+      "title": "Button",
+      "type": "object"
+    },
+    "ButtonGroup": {
+      "properties": {
+        "component_type": {
+          "const": "ButtonGroup",
+          "default": "ButtonGroup",
+          "enum": [
+            "ButtonGroup"
+          ],
+          "title": "Component Type",
+          "type": "string"
+        },
+        "items": {
+          "items": {
+            "$ref": "#/$defs/ButtonGroupItem"
+          },
+          "title": "Items",
+          "type": "array"
+        }
+      },
+      "required": [
+        "items"
+      ],
+      "title": "ButtonGroup",
+      "type": "object"
+    },
+    "ButtonGroupItem": {
+      "properties": {
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "is_active": {
+          "default": false,
+          "title": "Is Active",
+          "type": "boolean"
+        },
+        "href": {
+          "default": null,
+          "title": "Href",
+          "type": "string"
+        }
+      },
+      "required": [
+        "label"
+      ],
+      "title": "ButtonGroupItem",
+      "type": "object"
+    },
+    "Component": {
+      "discriminator": {
+        "mapping": {
+          "Button": "#/$defs/Button",
+          "ButtonGroup": "#/$defs/ButtonGroup",
+          "DatePicker": "#/$defs/DatePicker",
+          "FlexBox": "#/$defs/FlexBox",
+          "Grid": "#/$defs/Grid",
+          "Icon": "#/$defs/Icon",
+          "Markdown": "#/$defs/Markdown",
+          "NavigationButton": "#/$defs/NavigationButton",
+          "NavigationSection": "#/$defs/NavigationSection",
+          "Page": "#/$defs/Page",
+          "PropertyCard": "#/$defs/PropertyCard",
+          "SectionHeader": "#/$defs/SectionHeader",
+          "Sidebar": "#/$defs/Sidebar",
+          "Table": "#/$defs/Table"
+        },
+        "propertyName": "component_type"
+      },
+      "oneOf": [
+        {
+          "$ref": "#/$defs/Button"
+        },
+        {
+          "$ref": "#/$defs/ButtonGroup"
+        },
+        {
+          "$ref": "#/$defs/DatePicker"
+        },
+        {
+          "$ref": "#/$defs/FlexBox"
+        },
+        {
+          "$ref": "#/$defs/Grid"
+        },
+        {
+          "$ref": "#/$defs/Icon"
+        },
+        {
+          "$ref": "#/$defs/Markdown"
+        },
+        {
+          "$ref": "#/$defs/PropertyCard"
+        },
+        {
+          "$ref": "#/$defs/SectionHeader"
+        },
+        {
+          "$ref": "#/$defs/Table"
+        },
+        {
+          "$ref": "#/$defs/Page"
+        },
+        {
+          "$ref": "#/$defs/Sidebar"
+        },
+        {
+          "$ref": "#/$defs/NavigationButton"
+        },
+        {
+          "$ref": "#/$defs/NavigationSection"
+        }
+      ],
+      "title": "Component"
+    },
+    "DatePicker": {
+      "properties": {
+        "component_type": {
+          "const": "DatePicker",
+          "default": "DatePicker",
+          "enum": [
+            "DatePicker"
+          ],
+          "title": "Component Type",
+          "type": "string"
+        }
+      },
+      "title": "DatePicker",
+      "type": "object"
+    },
+    "FlexBox": {
+      "description": "FlexBox is a stack of components in a specific direction.\n\nIf you want the flexbox to wrap after a certain number of items, you can use the `Grid` component.",
+      "properties": {
+        "component_type": {
+          "const": "FlexBox",
+          "default": "FlexBox",
+          "enum": [
+            "FlexBox"
+          ],
+          "title": "Component Type",
+          "type": "string"
+        },
+        "gap": {
+          "default": null,
+          "title": "Gap",
+          "type": "integer"
+        },
+        "dir": {
+          "enum": [
+            "horizontal",
+            "vertical"
+          ],
+          "title": "Dir",
+          "type": "string"
+        },
+        "children": {
+          "items": {
+            "$ref": "#/$defs/Component"
+          },
+          "title": "Children",
+          "type": "array"
+        }
+      },
+      "required": [
+        "dir",
+        "children"
+      ],
+      "title": "FlexBox",
+      "type": "object"
+    },
+    "Grid": {
+      "description": "A Grid of components.\n\nIf you want to have an infinite number of items in a row or column, you can use the `FlexBox` component.",
+      "properties": {
+        "component_type": {
+          "const": "Grid",
+          "default": "Grid",
+          "enum": [
+            "Grid"
+          ],
+          "title": "Component Type",
+          "type": "string"
+        },
+        "cols": {
+          "title": "Cols",
+          "type": "integer"
+        },
+        "gapX": {
+          "default": null,
+          "title": "Gapx",
+          "type": "integer"
+        },
+        "gapY": {
+          "default": null,
+          "title": "Gapy",
+          "type": "integer"
+        },
+        "children": {
+          "items": {
+            "$ref": "#/$defs/Component"
+          },
+          "title": "Children",
+          "type": "array"
+        }
+      },
+      "required": [
+        "cols",
+        "children"
+      ],
+      "title": "Grid",
+      "type": "object"
+    },
+    "Icon": {
+      "properties": {
+        "component_type": {
+          "const": "Icon",
+          "default": "Icon",
+          "enum": [
+            "Icon"
+          ],
+          "title": "Component Type",
+          "type": "string"
+        },
+        "name": {
+          "enum": [
+            "AcademicCapIcon",
+            "AdjustmentsHorizontalIcon",
+            "AdjustmentsVerticalIcon",
+            "ArchiveBoxArrowDownIcon",
+            "ArchiveBoxXMarkIcon",
+            "ArchiveBoxIcon",
+            "ArrowDownCircleIcon",
+            "ArrowDownLeftIcon",
+            "ArrowDownOnSquareStackIcon",
+            "ArrowDownOnSquareIcon",
+            "ArrowDownRightIcon",
+            "ArrowDownTrayIcon",
+            "ArrowDownIcon",
+            "ArrowLeftCircleIcon",
+            "ArrowLeftEndOnRectangleIcon",
+            "ArrowLeftOnRectangleIcon",
+            "ArrowLeftStartOnRectangleIcon",
+            "ArrowLeftIcon",
+            "ArrowLongDownIcon",
+            "ArrowLongLeftIcon",
+            "ArrowLongRightIcon",
+            "ArrowLongUpIcon",
+            "ArrowPathRoundedSquareIcon",
+            "ArrowPathIcon",
+            "ArrowRightCircleIcon",
+            "ArrowRightEndOnRectangleIcon",
+            "ArrowRightOnRectangleIcon",
+            "ArrowRightStartOnRectangleIcon",
+            "ArrowRightIcon",
+            "ArrowSmallDownIcon",
+            "ArrowSmallLeftIcon",
+            "ArrowSmallRightIcon",
+            "ArrowSmallUpIcon",
+            "ArrowTopRightOnSquareIcon",
+            "ArrowTrendingDownIcon",
+            "ArrowTrendingUpIcon",
+            "ArrowTurnDownLeftIcon",
+            "ArrowTurnDownRightIcon",
+            "ArrowTurnLeftDownIcon",
+            "ArrowTurnLeftUpIcon",
+            "ArrowTurnRightDownIcon",
+            "ArrowTurnRightUpIcon",
+            "ArrowTurnUpLeftIcon",
+            "ArrowTurnUpRightIcon",
+            "ArrowUpCircleIcon",
+            "ArrowUpLeftIcon",
+            "ArrowUpOnSquareStackIcon",
+            "ArrowUpOnSquareIcon",
+            "ArrowUpRightIcon",
+            "ArrowUpTrayIcon",
+            "ArrowUpIcon",
+            "ArrowUturnDownIcon",
+            "ArrowUturnLeftIcon",
+            "ArrowUturnRightIcon",
+            "ArrowUturnUpIcon",
+            "ArrowsPointingInIcon",
+            "ArrowsPointingOutIcon",
+            "ArrowsRightLeftIcon",
+            "ArrowsUpDownIcon",
+            "AtSymbolIcon",
+            "BackspaceIcon",
+            "BackwardIcon",
+            "BanknotesIcon",
+            "Bars2Icon",
+            "Bars3BottomLeftIcon",
+            "Bars3BottomRightIcon",
+            "Bars3CenterLeftIcon",
+            "Bars3Icon",
+            "Bars4Icon",
+            "BarsArrowDownIcon",
+            "BarsArrowUpIcon",
+            "Battery0Icon",
+            "Battery100Icon",
+            "Battery50Icon",
+            "BeakerIcon",
+            "BellAlertIcon",
+            "BellSlashIcon",
+            "BellSnoozeIcon",
+            "BellIcon",
+            "BoldIcon",
+            "BoltSlashIcon",
+            "BoltIcon",
+            "BookOpenIcon",
+            "BookmarkSlashIcon",
+            "BookmarkSquareIcon",
+            "BookmarkIcon",
+            "BriefcaseIcon",
+            "BugAntIcon",
+            "BuildingLibraryIcon",
+            "BuildingOffice2Icon",
+            "BuildingOfficeIcon",
+            "BuildingStorefrontIcon",
+            "CakeIcon",
+            "CalculatorIcon",
+            "CalendarDateRangeIcon",
+            "CalendarDaysIcon",
+            "CalendarIcon",
+            "CameraIcon",
+            "ChartBarSquareIcon",
+            "ChartBarIcon",
+            "ChartPieIcon",
+            "ChatBubbleBottomCenterTextIcon",
+            "ChatBubbleBottomCenterIcon",
+            "ChatBubbleLeftEllipsisIcon",
+            "ChatBubbleLeftRightIcon",
+            "ChatBubbleLeftIcon",
+            "ChatBubbleOvalLeftEllipsisIcon",
+            "ChatBubbleOvalLeftIcon",
+            "CheckBadgeIcon",
+            "CheckCircleIcon",
+            "CheckIcon",
+            "ChevronDoubleDownIcon",
+            "ChevronDoubleLeftIcon",
+            "ChevronDoubleRightIcon",
+            "ChevronDoubleUpIcon",
+            "ChevronDownIcon",
+            "ChevronLeftIcon",
+            "ChevronRightIcon",
+            "ChevronUpDownIcon",
+            "ChevronUpIcon",
+            "CircleStackIcon",
+            "ClipboardDocumentCheckIcon",
+            "ClipboardDocumentListIcon",
+            "ClipboardDocumentIcon",
+            "ClipboardIcon",
+            "ClockIcon",
+            "CloudArrowDownIcon",
+            "CloudArrowUpIcon",
+            "CloudIcon",
+            "CodeBracketSquareIcon",
+            "CodeBracketIcon",
+            "Cog6ToothIcon",
+            "Cog8ToothIcon",
+            "CogIcon",
+            "CommandLineIcon",
+            "ComputerDesktopIcon",
+            "CpuChipIcon",
+            "CreditCardIcon",
+            "CubeTransparentIcon",
+            "CubeIcon",
+            "CurrencyBangladeshiIcon",
+            "CurrencyDollarIcon",
+            "CurrencyEuroIcon",
+            "CurrencyPoundIcon",
+            "CurrencyRupeeIcon",
+            "CurrencyYenIcon",
+            "CursorArrowRaysIcon",
+            "CursorArrowRippleIcon",
+            "DevicePhoneMobileIcon",
+            "DeviceTabletIcon",
+            "DivideIcon",
+            "DocumentArrowDownIcon",
+            "DocumentArrowUpIcon",
+            "DocumentChartBarIcon",
+            "DocumentCheckIcon",
+            "DocumentCurrencyBangladeshiIcon",
+            "DocumentCurrencyDollarIcon",
+            "DocumentCurrencyEuroIcon",
+            "DocumentCurrencyPoundIcon",
+            "DocumentCurrencyRupeeIcon",
+            "DocumentCurrencyYenIcon",
+            "DocumentDuplicateIcon",
+            "DocumentMagnifyingGlassIcon",
+            "DocumentMinusIcon",
+            "DocumentPlusIcon",
+            "DocumentTextIcon",
+            "DocumentIcon",
+            "EllipsisHorizontalCircleIcon",
+            "EllipsisHorizontalIcon",
+            "EllipsisVerticalIcon",
+            "EnvelopeOpenIcon",
+            "EnvelopeIcon",
+            "EqualsIcon",
+            "ExclamationCircleIcon",
+            "ExclamationTriangleIcon",
+            "EyeDropperIcon",
+            "EyeSlashIcon",
+            "EyeIcon",
+            "FaceFrownIcon",
+            "FaceSmileIcon",
+            "FilmIcon",
+            "FingerPrintIcon",
+            "FireIcon",
+            "FlagIcon",
+            "FolderArrowDownIcon",
+            "FolderMinusIcon",
+            "FolderOpenIcon",
+            "FolderPlusIcon",
+            "FolderIcon",
+            "ForwardIcon",
+            "FunnelIcon",
+            "GifIcon",
+            "GiftTopIcon",
+            "GiftIcon",
+            "GlobeAltIcon",
+            "GlobeAmericasIcon",
+            "GlobeAsiaAustraliaIcon",
+            "GlobeEuropeAfricaIcon",
+            "H1Icon",
+            "H2Icon",
+            "H3Icon",
+            "HandRaisedIcon",
+            "HandThumbDownIcon",
+            "HandThumbUpIcon",
+            "HashtagIcon",
+            "HeartIcon",
+            "HomeModernIcon",
+            "HomeIcon",
+            "IdentificationIcon",
+            "InboxArrowDownIcon",
+            "InboxStackIcon",
+            "InboxIcon",
+            "InformationCircleIcon",
+            "ItalicIcon",
+            "KeyIcon",
+            "LanguageIcon",
+            "LifebuoyIcon",
+            "LightBulbIcon",
+            "LinkSlashIcon",
+            "LinkIcon",
+            "ListBulletIcon",
+            "LockClosedIcon",
+            "LockOpenIcon",
+            "MagnifyingGlassCircleIcon",
+            "MagnifyingGlassMinusIcon",
+            "MagnifyingGlassPlusIcon",
+            "MagnifyingGlassIcon",
+            "MapPinIcon",
+            "MapIcon",
+            "MegaphoneIcon",
+            "MicrophoneIcon",
+            "MinusCircleIcon",
+            "MinusSmallIcon",
+            "MinusIcon",
+            "MoonIcon",
+            "MusicalNoteIcon",
+            "NewspaperIcon",
+            "NoSymbolIcon",
+            "NumberedListIcon",
+            "PaintBrushIcon",
+            "PaperAirplaneIcon",
+            "PaperClipIcon",
+            "PauseCircleIcon",
+            "PauseIcon",
+            "PencilSquareIcon",
+            "PencilIcon",
+            "PercentBadgeIcon",
+            "PhoneArrowDownLeftIcon",
+            "PhoneArrowUpRightIcon",
+            "PhoneXMarkIcon",
+            "PhoneIcon",
+            "PhotoIcon",
+            "PlayCircleIcon",
+            "PlayPauseIcon",
+            "PlayIcon",
+            "PlusCircleIcon",
+            "PlusSmallIcon",
+            "PlusIcon",
+            "PowerIcon",
+            "PresentationChartBarIcon",
+            "PresentationChartLineIcon",
+            "PrinterIcon",
+            "PuzzlePieceIcon",
+            "QrCodeIcon",
+            "QuestionMarkCircleIcon",
+            "QueueListIcon",
+            "RadioIcon",
+            "ReceiptPercentIcon",
+            "ReceiptRefundIcon",
+            "RectangleGroupIcon",
+            "RectangleStackIcon",
+            "RocketLaunchIcon",
+            "RssIcon",
+            "ScaleIcon",
+            "ScissorsIcon",
+            "ServerStackIcon",
+            "ServerIcon",
+            "ShareIcon",
+            "ShieldCheckIcon",
+            "ShieldExclamationIcon",
+            "ShoppingBagIcon",
+            "ShoppingCartIcon",
+            "SignalSlashIcon",
+            "SignalIcon",
+            "SlashIcon",
+            "SparklesIcon",
+            "SpeakerWaveIcon",
+            "SpeakerXMarkIcon",
+            "Square2StackIcon",
+            "Square3Stack3DIcon",
+            "Squares2X2Icon",
+            "SquaresPlusIcon",
+            "StarIcon",
+            "StopCircleIcon",
+            "StopIcon",
+            "StrikethroughIcon",
+            "SunIcon",
+            "SwatchIcon",
+            "TableCellsIcon",
+            "TagIcon",
+            "TicketIcon",
+            "TrashIcon",
+            "TrophyIcon",
+            "TruckIcon",
+            "TvIcon",
+            "UnderlineIcon",
+            "UserCircleIcon",
+            "UserGroupIcon",
+            "UserMinusIcon",
+            "UserPlusIcon",
+            "UserIcon",
+            "UsersIcon",
+            "VariableIcon",
+            "VideoCameraSlashIcon",
+            "VideoCameraIcon",
+            "ViewColumnsIcon",
+            "ViewfinderCircleIcon",
+            "WalletIcon",
+            "WifiIcon",
+            "WindowIcon",
+            "WrenchScrewdriverIcon",
+            "WrenchIcon",
+            "XCircleIcon",
+            "XMarkIcon"
+          ],
+          "title": "Name",
+          "type": "string"
+        },
+        "size": {
+          "default": null,
+          "enum": [
+            "small",
+            "medium",
+            "large"
+          ],
+          "title": "Size",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "Icon",
+      "type": "object"
+    },
+    "KeyValueString": {
+      "properties": {
+        "key": {
+          "title": "Key",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "key",
+        "value"
+      ],
+      "title": "KeyValueString",
+      "type": "object"
+    },
+    "Markdown": {
+      "properties": {
+        "component_type": {
+          "const": "Markdown",
+          "default": "Markdown",
+          "enum": [
+            "Markdown"
+          ],
+          "title": "Component Type",
+          "type": "string"
+        },
+        "markdown": {
+          "default": null,
+          "title": "Markdown",
+          "type": "string"
+        }
+      },
+      "title": "Markdown",
+      "type": "object"
+    },
+    "NavigationButton": {
+      "properties": {
+        "component_type": {
+          "const": "NavigationButton",
+          "default": "NavigationButton",
+          "enum": [
+            "NavigationButton"
+          ],
+          "title": "Component Type",
+          "type": "string"
+        },
+        "is_active": {
+          "default": false,
+          "title": "Is Active",
+          "type": "boolean"
+        },
+        "icon": {
+          "enum": [
+            "AcademicCapIcon",
+            "AdjustmentsHorizontalIcon",
+            "AdjustmentsVerticalIcon",
+            "ArchiveBoxArrowDownIcon",
+            "ArchiveBoxXMarkIcon",
+            "ArchiveBoxIcon",
+            "ArrowDownCircleIcon",
+            "ArrowDownLeftIcon",
+            "ArrowDownOnSquareStackIcon",
+            "ArrowDownOnSquareIcon",
+            "ArrowDownRightIcon",
+            "ArrowDownTrayIcon",
+            "ArrowDownIcon",
+            "ArrowLeftCircleIcon",
+            "ArrowLeftEndOnRectangleIcon",
+            "ArrowLeftOnRectangleIcon",
+            "ArrowLeftStartOnRectangleIcon",
+            "ArrowLeftIcon",
+            "ArrowLongDownIcon",
+            "ArrowLongLeftIcon",
+            "ArrowLongRightIcon",
+            "ArrowLongUpIcon",
+            "ArrowPathRoundedSquareIcon",
+            "ArrowPathIcon",
+            "ArrowRightCircleIcon",
+            "ArrowRightEndOnRectangleIcon",
+            "ArrowRightOnRectangleIcon",
+            "ArrowRightStartOnRectangleIcon",
+            "ArrowRightIcon",
+            "ArrowSmallDownIcon",
+            "ArrowSmallLeftIcon",
+            "ArrowSmallRightIcon",
+            "ArrowSmallUpIcon",
+            "ArrowTopRightOnSquareIcon",
+            "ArrowTrendingDownIcon",
+            "ArrowTrendingUpIcon",
+            "ArrowTurnDownLeftIcon",
+            "ArrowTurnDownRightIcon",
+            "ArrowTurnLeftDownIcon",
+            "ArrowTurnLeftUpIcon",
+            "ArrowTurnRightDownIcon",
+            "ArrowTurnRightUpIcon",
+            "ArrowTurnUpLeftIcon",
+            "ArrowTurnUpRightIcon",
+            "ArrowUpCircleIcon",
+            "ArrowUpLeftIcon",
+            "ArrowUpOnSquareStackIcon",
+            "ArrowUpOnSquareIcon",
+            "ArrowUpRightIcon",
+            "ArrowUpTrayIcon",
+            "ArrowUpIcon",
+            "ArrowUturnDownIcon",
+            "ArrowUturnLeftIcon",
+            "ArrowUturnRightIcon",
+            "ArrowUturnUpIcon",
+            "ArrowsPointingInIcon",
+            "ArrowsPointingOutIcon",
+            "ArrowsRightLeftIcon",
+            "ArrowsUpDownIcon",
+            "AtSymbolIcon",
+            "BackspaceIcon",
+            "BackwardIcon",
+            "BanknotesIcon",
+            "Bars2Icon",
+            "Bars3BottomLeftIcon",
+            "Bars3BottomRightIcon",
+            "Bars3CenterLeftIcon",
+            "Bars3Icon",
+            "Bars4Icon",
+            "BarsArrowDownIcon",
+            "BarsArrowUpIcon",
+            "Battery0Icon",
+            "Battery100Icon",
+            "Battery50Icon",
+            "BeakerIcon",
+            "BellAlertIcon",
+            "BellSlashIcon",
+            "BellSnoozeIcon",
+            "BellIcon",
+            "BoldIcon",
+            "BoltSlashIcon",
+            "BoltIcon",
+            "BookOpenIcon",
+            "BookmarkSlashIcon",
+            "BookmarkSquareIcon",
+            "BookmarkIcon",
+            "BriefcaseIcon",
+            "BugAntIcon",
+            "BuildingLibraryIcon",
+            "BuildingOffice2Icon",
+            "BuildingOfficeIcon",
+            "BuildingStorefrontIcon",
+            "CakeIcon",
+            "CalculatorIcon",
+            "CalendarDateRangeIcon",
+            "CalendarDaysIcon",
+            "CalendarIcon",
+            "CameraIcon",
+            "ChartBarSquareIcon",
+            "ChartBarIcon",
+            "ChartPieIcon",
+            "ChatBubbleBottomCenterTextIcon",
+            "ChatBubbleBottomCenterIcon",
+            "ChatBubbleLeftEllipsisIcon",
+            "ChatBubbleLeftRightIcon",
+            "ChatBubbleLeftIcon",
+            "ChatBubbleOvalLeftEllipsisIcon",
+            "ChatBubbleOvalLeftIcon",
+            "CheckBadgeIcon",
+            "CheckCircleIcon",
+            "CheckIcon",
+            "ChevronDoubleDownIcon",
+            "ChevronDoubleLeftIcon",
+            "ChevronDoubleRightIcon",
+            "ChevronDoubleUpIcon",
+            "ChevronDownIcon",
+            "ChevronLeftIcon",
+            "ChevronRightIcon",
+            "ChevronUpDownIcon",
+            "ChevronUpIcon",
+            "CircleStackIcon",
+            "ClipboardDocumentCheckIcon",
+            "ClipboardDocumentListIcon",
+            "ClipboardDocumentIcon",
+            "ClipboardIcon",
+            "ClockIcon",
+            "CloudArrowDownIcon",
+            "CloudArrowUpIcon",
+            "CloudIcon",
+            "CodeBracketSquareIcon",
+            "CodeBracketIcon",
+            "Cog6ToothIcon",
+            "Cog8ToothIcon",
+            "CogIcon",
+            "CommandLineIcon",
+            "ComputerDesktopIcon",
+            "CpuChipIcon",
+            "CreditCardIcon",
+            "CubeTransparentIcon",
+            "CubeIcon",
+            "CurrencyBangladeshiIcon",
+            "CurrencyDollarIcon",
+            "CurrencyEuroIcon",
+            "CurrencyPoundIcon",
+            "CurrencyRupeeIcon",
+            "CurrencyYenIcon",
+            "CursorArrowRaysIcon",
+            "CursorArrowRippleIcon",
+            "DevicePhoneMobileIcon",
+            "DeviceTabletIcon",
+            "DivideIcon",
+            "DocumentArrowDownIcon",
+            "DocumentArrowUpIcon",
+            "DocumentChartBarIcon",
+            "DocumentCheckIcon",
+            "DocumentCurrencyBangladeshiIcon",
+            "DocumentCurrencyDollarIcon",
+            "DocumentCurrencyEuroIcon",
+            "DocumentCurrencyPoundIcon",
+            "DocumentCurrencyRupeeIcon",
+            "DocumentCurrencyYenIcon",
+            "DocumentDuplicateIcon",
+            "DocumentMagnifyingGlassIcon",
+            "DocumentMinusIcon",
+            "DocumentPlusIcon",
+            "DocumentTextIcon",
+            "DocumentIcon",
+            "EllipsisHorizontalCircleIcon",
+            "EllipsisHorizontalIcon",
+            "EllipsisVerticalIcon",
+            "EnvelopeOpenIcon",
+            "EnvelopeIcon",
+            "EqualsIcon",
+            "ExclamationCircleIcon",
+            "ExclamationTriangleIcon",
+            "EyeDropperIcon",
+            "EyeSlashIcon",
+            "EyeIcon",
+            "FaceFrownIcon",
+            "FaceSmileIcon",
+            "FilmIcon",
+            "FingerPrintIcon",
+            "FireIcon",
+            "FlagIcon",
+            "FolderArrowDownIcon",
+            "FolderMinusIcon",
+            "FolderOpenIcon",
+            "FolderPlusIcon",
+            "FolderIcon",
+            "ForwardIcon",
+            "FunnelIcon",
+            "GifIcon",
+            "GiftTopIcon",
+            "GiftIcon",
+            "GlobeAltIcon",
+            "GlobeAmericasIcon",
+            "GlobeAsiaAustraliaIcon",
+            "GlobeEuropeAfricaIcon",
+            "H1Icon",
+            "H2Icon",
+            "H3Icon",
+            "HandRaisedIcon",
+            "HandThumbDownIcon",
+            "HandThumbUpIcon",
+            "HashtagIcon",
+            "HeartIcon",
+            "HomeModernIcon",
+            "HomeIcon",
+            "IdentificationIcon",
+            "InboxArrowDownIcon",
+            "InboxStackIcon",
+            "InboxIcon",
+            "InformationCircleIcon",
+            "ItalicIcon",
+            "KeyIcon",
+            "LanguageIcon",
+            "LifebuoyIcon",
+            "LightBulbIcon",
+            "LinkSlashIcon",
+            "LinkIcon",
+            "ListBulletIcon",
+            "LockClosedIcon",
+            "LockOpenIcon",
+            "MagnifyingGlassCircleIcon",
+            "MagnifyingGlassMinusIcon",
+            "MagnifyingGlassPlusIcon",
+            "MagnifyingGlassIcon",
+            "MapPinIcon",
+            "MapIcon",
+            "MegaphoneIcon",
+            "MicrophoneIcon",
+            "MinusCircleIcon",
+            "MinusSmallIcon",
+            "MinusIcon",
+            "MoonIcon",
+            "MusicalNoteIcon",
+            "NewspaperIcon",
+            "NoSymbolIcon",
+            "NumberedListIcon",
+            "PaintBrushIcon",
+            "PaperAirplaneIcon",
+            "PaperClipIcon",
+            "PauseCircleIcon",
+            "PauseIcon",
+            "PencilSquareIcon",
+            "PencilIcon",
+            "PercentBadgeIcon",
+            "PhoneArrowDownLeftIcon",
+            "PhoneArrowUpRightIcon",
+            "PhoneXMarkIcon",
+            "PhoneIcon",
+            "PhotoIcon",
+            "PlayCircleIcon",
+            "PlayPauseIcon",
+            "PlayIcon",
+            "PlusCircleIcon",
+            "PlusSmallIcon",
+            "PlusIcon",
+            "PowerIcon",
+            "PresentationChartBarIcon",
+            "PresentationChartLineIcon",
+            "PrinterIcon",
+            "PuzzlePieceIcon",
+            "QrCodeIcon",
+            "QuestionMarkCircleIcon",
+            "QueueListIcon",
+            "RadioIcon",
+            "ReceiptPercentIcon",
+            "ReceiptRefundIcon",
+            "RectangleGroupIcon",
+            "RectangleStackIcon",
+            "RocketLaunchIcon",
+            "RssIcon",
+            "ScaleIcon",
+            "ScissorsIcon",
+            "ServerStackIcon",
+            "ServerIcon",
+            "ShareIcon",
+            "ShieldCheckIcon",
+            "ShieldExclamationIcon",
+            "ShoppingBagIcon",
+            "ShoppingCartIcon",
+            "SignalSlashIcon",
+            "SignalIcon",
+            "SlashIcon",
+            "SparklesIcon",
+            "SpeakerWaveIcon",
+            "SpeakerXMarkIcon",
+            "Square2StackIcon",
+            "Square3Stack3DIcon",
+            "Squares2X2Icon",
+            "SquaresPlusIcon",
+            "StarIcon",
+            "StopCircleIcon",
+            "StopIcon",
+            "StrikethroughIcon",
+            "SunIcon",
+            "SwatchIcon",
+            "TableCellsIcon",
+            "TagIcon",
+            "TicketIcon",
+            "TrashIcon",
+            "TrophyIcon",
+            "TruckIcon",
+            "TvIcon",
+            "UnderlineIcon",
+            "UserCircleIcon",
+            "UserGroupIcon",
+            "UserMinusIcon",
+            "UserPlusIcon",
+            "UserIcon",
+            "UsersIcon",
+            "VariableIcon",
+            "VideoCameraSlashIcon",
+            "VideoCameraIcon",
+            "ViewColumnsIcon",
+            "ViewfinderCircleIcon",
+            "WalletIcon",
+            "WifiIcon",
+            "WindowIcon",
+            "WrenchScrewdriverIcon",
+            "WrenchIcon",
+            "XCircleIcon",
+            "XMarkIcon"
+          ],
+          "title": "Icon",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "href": {
+          "default": null,
+          "title": "Href",
+          "type": "string"
+        }
+      },
+      "required": [
+        "icon",
+        "label"
+      ],
+      "title": "NavigationButton",
+      "type": "object"
+    },
+    "NavigationSection": {
+      "properties": {
+        "component_type": {
+          "const": "NavigationSection",
+          "default": "NavigationSection",
+          "enum": [
+            "NavigationSection"
+          ],
+          "title": "Component Type",
+          "type": "string"
+        },
+        "title": {
+          "default": null,
+          "title": "Title",
+          "type": "string"
+        },
+        "children": {
+          "items": {
+            "$ref": "#/$defs/Component"
+          },
+          "title": "Children",
+          "type": "array"
+        }
+      },
+      "required": [
+        "children"
+      ],
+      "title": "NavigationSection",
+      "type": "object"
+    },
+    "Page": {
+      "properties": {
+        "component_type": {
+          "const": "Page",
+          "default": "Page",
+          "enum": [
+            "Page"
+          ],
+          "title": "Component Type",
+          "type": "string"
+        },
+        "sidebar": {
+          "$ref": "#/$defs/Component"
+        },
+        "children": {
+          "items": {
+            "$ref": "#/$defs/Component"
+          },
+          "title": "Children",
+          "type": "array"
+        }
+      },
+      "required": [
+        "sidebar",
+        "children"
+      ],
+      "title": "Page",
+      "type": "object"
+    },
+    "PropertyCard": {
+      "properties": {
+        "component_type": {
+          "const": "PropertyCard",
+          "default": "PropertyCard",
+          "enum": [
+            "PropertyCard"
+          ],
+          "title": "Component Type",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "key_value_pairs": {
+          "default": null,
+          "items": {
+            "$ref": "#/$defs/KeyValueString"
+          },
+          "title": "Key Value Pairs",
+          "type": "array"
+        },
+        "condensed": {
+          "default": null,
+          "title": "Condensed",
+          "type": "boolean"
+        },
+        "is_active": {
+          "default": null,
+          "title": "Is Active",
+          "type": "boolean"
+        },
+        "href": {
+          "default": null,
+          "title": "Href",
+          "type": "string"
+        }
+      },
+      "required": [
+        "title"
+      ],
+      "title": "PropertyCard",
+      "type": "object"
+    },
+    "SectionHeader": {
+      "properties": {
+        "component_type": {
+          "const": "SectionHeader",
+          "default": "SectionHeader",
+          "enum": [
+            "SectionHeader"
+          ],
+          "title": "Component Type",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "subtitle": {
+          "default": null,
+          "title": "Subtitle",
+          "type": "string"
+        },
+        "size": {
+          "default": null,
+          "enum": [
+            "small",
+            "medium",
+            "large"
+          ],
+          "title": "Size",
+          "type": "string"
+        },
+        "children": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Component"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "title"
+      ],
+      "title": "SectionHeader",
+      "type": "object"
+    },
+    "Sidebar": {
+      "properties": {
+        "component_type": {
+          "const": "Sidebar",
+          "default": "Sidebar",
+          "enum": [
+            "Sidebar"
+          ],
+          "title": "Component Type",
+          "type": "string"
+        },
+        "last_component_sticks_to_bottom": {
+          "default": null,
+          "title": "Last Component Sticks To Bottom",
+          "type": "boolean"
+        },
+        "children": {
+          "items": {
+            "$ref": "#/$defs/Component"
+          },
+          "title": "Children",
+          "type": "array"
+        }
+      },
+      "required": [
+        "children"
+      ],
+      "title": "Sidebar",
+      "type": "object"
+    },
+    "Table": {
+      "properties": {
+        "component_type": {
+          "const": "Table",
+          "default": "Table",
+          "enum": [
+            "Table"
+          ],
+          "title": "Component Type",
+          "type": "string"
+        },
+        "columns": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Columns",
+          "type": "array"
+        },
+        "data": {
+          "items": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "title": "Data",
+          "type": "array"
+        }
+      },
+      "required": [
+        "columns",
+        "data"
+      ],
+      "title": "Table",
+      "type": "object"
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "#/$defs/Component"
+    }
+  ]
+}
