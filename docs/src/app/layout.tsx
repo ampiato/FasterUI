@@ -4,7 +4,7 @@ import localFont from 'next/font/local'
 import clsx from 'clsx'
 
 import { Providers } from '@/app/providers'
-import { Layout } from '@/components/Layout'
+import { Layout, LayoutFullPage } from '@/components/Layout'
 
 import '@/styles/tailwind.css'
 
@@ -21,7 +21,7 @@ const lexend = localFont({
   variable: '--font-lexend',
 })
 
-export const metadata: Metadata = {
+const metadata: Metadata = {
   title: {
     template: '%s - Docs',
     default: 'FasterUI - A framework for building beautiful UIs. Pronto!.',
@@ -43,9 +43,10 @@ export default function RootLayout({
     >
       <body className="flex min-h-full bg-white dark:bg-slate-900">
         <Providers>
-          <Layout>{children}</Layout>
+          {children}
         </Providers>
       </body>
     </html>
   )
 }
+

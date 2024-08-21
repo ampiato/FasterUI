@@ -89,3 +89,20 @@ export function Layout({ children }: { children: React.ReactNode }) {
     </div>
   )
 }
+
+export function LayoutFullPage({ children }: { children: React.ReactNode }) {
+  let pathname = usePathname()
+  let isHomePage = pathname === '/'
+
+  return (
+    <div className="flex w-full flex-col">
+      <Header />
+
+      {isHomePage && <Hero />}
+
+      <div className="h-full w-full sm:px-2 lg:px-8 xl:px-12 top-0 bottom-0">
+        {children}
+      </div>
+    </div>
+  )
+}
