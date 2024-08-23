@@ -1,14 +1,10 @@
 import argparse
 import json
-from textwrap import dedent
-from typing import Literal
-from pathlib import Path
 
 import uvicorn
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.openapi.utils import get_openapi
-from pydantic import TypeAdapter, BaseModel
 
 import fasterui.components as c
 from . import examples
@@ -39,8 +35,8 @@ app = FastAPI(
     },
     openapi_tags=tags_metadata,
     openapi_url="/api/openapi.json",
-    docs_url="/api/docs", 
-    redoc_url=None
+    docs_url="/api/docs",
+    redoc_url=None,
 )
 
 app.add_middleware(
@@ -64,7 +60,12 @@ def list_of_examples() -> dict:
     return {"examples": res}
 
 
-@app.get("/api/examples/{id}/component.json", tags=["examples"], responses={200: {"model": c.Component}, 422: {"model": str}}, response_model_exclude_none=True)
+@app.get(
+    "/api/examples/{id}/component.json",
+    tags=["examples"],
+    responses={200: {"model": c.Component}, 422: {"model": str}},
+    response_model_exclude_none=True,
+)
 def example(id: str) -> c.Component:
     if not hasattr(examples, id):
         raise HTTPException(status_code=404, detail="Example not found")

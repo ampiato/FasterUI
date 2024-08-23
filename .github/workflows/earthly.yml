@@ -57,9 +57,8 @@ jobs:
 
       - name: Run tests
         run: |
-          earthly \
-            --artifact '+artifacts/*' ./dist/ \
-            --push +ci --version $RELEASE_VERSION
+          earthly --push --ci +ci --version $RELEASE_VERSION
+          earthly --artifact '+artifacts/*' ./dist/ --push +ci --version $RELEASE_VERSION
 
           cd dist
           zip -r storybook.zip storybook-static
@@ -68,15 +67,6 @@ jobs:
         with:
           name: Build
           path: dist
-
-      - name: Build fasterui image
-        uses: docker/build-push-action@v6
-        with:
-          context: .
-          platforms: linux/amd64,linux/arm64
-          file: python/Dockerfile
-          push: true
-          tags: ampiato/fasterui${{ env.SUFFIX }}:${{ env.DOCKER_TAG }}
 
       - name: Build fasterui-docs image
         uses: docker/build-push-action@v6
