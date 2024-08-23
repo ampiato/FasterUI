@@ -21,16 +21,6 @@ artifacts:
     SAVE ARTIFACT storybook-static
 
 
-deploy-docs:
-    FROM ./docs+deps
-
-    COPY +artifacts/storybook-static ./public/storybook
-    COPY +artifacts/openapi.json ./public/openapi.json
-
-    RUN --secret NETLIFY_AUTH_TOKEN --secret NETLIFY_SITE_ID netlify build --context production
-    RUN --push --secret NETLIFY_AUTH_TOKEN --secret NETLIFY_SITE_ID netlify deploy --prod
-
-
 deploy-python:
     ARG version
     FROM python:3
