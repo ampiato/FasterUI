@@ -79,7 +79,7 @@ export default function Page() {
   }, [problems, editorContent]);
 
   const onExampleSelect = (id: string, layout: "full-width" | "centered") => {
-    fetch(`https://fasterui.ampiato.com/api/examples/${id}/component.json`)
+    fetch(`/api/examples/${id}/component.json`)
       .then((res) => res.json())
       .then((data) => {
         const editor = editorRef.current;
