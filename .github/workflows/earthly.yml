@@ -47,7 +47,7 @@ jobs:
           path: dist
 
   earthly-arm:
-    runs-on: macos-latest
+    runs-on: self-hosted
     permissions:
       contents: write
 
