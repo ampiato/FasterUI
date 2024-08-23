@@ -10,8 +10,44 @@ on:
   
 
 jobs:
-  earthly-amd64:
-    runs-on: ubuntu-latest
+  # earthly-amd64:
+  #   runs-on: ubuntu-latest
+  #   permissions:
+  #     contents: write
+
+  #   steps:
+  #     - name: env
+  #       run: env
+
+  #     - uses: earthly/actions-setup@v1
+  #       with:
+  #         version: v0.8.0
+
+  #     - uses: actions/checkout@v4
+
+  #     - name: Build metadata
+  #       run: |
+  #         echo $DOCKERHUB_TOKEN | docker login -u $DOCKERHUB_USERNAME --password-stdin
+  #         ./deployment/github_env.sh
+  #       env:
+  #         DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+  #         DOCKERHUB_USERNAME: ${{ vars.DOCKERHUB_USERNAME }}
+
+  #     - name: Run tests
+  #       run: |
+  #         earthly --push --ci +ci --version $RELEASE_VERSION
+  #         earthly --artifact '+artifacts/*' ./dist/ --push +ci --version $RELEASE_VERSION
+
+  #         cd dist
+  #         zip -r storybook.zip storybook-static
+
+  #     - uses: actions/upload-artifact@v4
+  #       with:
+  #         name: Build
+  #         path: dist
+
+  earthly-arm:
+    runs-on: self-hosted
     permissions:
       contents: write
 
@@ -46,41 +82,16 @@ jobs:
           name: Build
           path: dist
 
-  earthly-arm:
-    runs-on: self-hosted
-    permissions:
-      contents: write
-
-    steps:
-      - name: env
-        run: env
-
-      - uses: earthly/actions-setup@v1
-        with:
-          version: v0.8.0
-
-      - uses: actions/checkout@v4
-
-      - name: Build metadata
-        run: |
-          echo $DOCKERHUB_TOKEN | docker login -u $DOCKERHUB_USERNAME --password-stdin
-          ./deployment/github_env.sh
-        env:
-          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-          DOCKERHUB_USERNAME: ${{ vars.DOCKERHUB_USERNAME }}
-
-      - name: Run tests
-        run: |
-          earthly --push --ci +ci --version $RELEASE_VERSION
 
   deploy:
     runs-on: ubuntu-latest
-    needs: [ earthly-amd64, earthly-arm ]
+    needs: [ earthly-arm ]
     permissions:
       contents: write
     if: github.ref == 'refs/heads/main'
 
     steps:
+      - uses: actions/checkout@v4
       - name: Build metadata
         run: |
           ./deployment/github_env.sh
@@ -90,7 +101,7 @@ jobs:
           mkdir -p ~/.kube
           echo "$KUBERNETES_CONFIG" > ~/.kube/config
 
-          ./deployment/deploy_staging.sh $RELEASE_VERSION $SUFFIX
+          ./deployment/deploy_staging.sh ${GITHUB_SHA:0:8} -dev
 
         env:
           KUBERNETES_CONFIG: ${{ secrets.KUBERNETES_CONFIG }}

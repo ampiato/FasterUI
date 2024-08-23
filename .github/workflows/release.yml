@@ -1,4 +1,4 @@
-name: Deploy
+name: Release
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
   
 
 jobs:
-  deploy:
+  release:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -44,11 +44,11 @@ jobs:
 
           cd dist
           zip -r storybook.zip storybook-static
-         env:
-            NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-            NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-            NPM_PUBLSH_KEY: ${{ secrets.NPM_PUBLSH_KEY }}
-            TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          NPM_PUBLSH_KEY: ${{ secrets.NPM_PUBLSH_KEY }}
+          TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}
 
       - uses: actions/upload-artifact@v4
         with:
@@ -59,7 +59,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')
         with:
-        files: |
+          files: |
             dist/openapi.json
             dist/storybook.zip
             dist/*.whl
