@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
       - name: fasterui
-        image: ampiato/fasterui:{{ .Values.image.tag }}
+        image: ampiato/fasterui{{ .Values.image.suffix }}:{{ .Values.image.tag }}
+        command: ["fasterui", "server"]
         ports:
         - containerPort: 8000
           name: backend

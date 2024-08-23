@@ -20,9 +20,13 @@ wheel:
 
 build:
     ARG version
+    ARG EARTHLY_GIT_SHORT_HASH
+
     FROM +wheel --version $version
     COPY +wheel/*.whl .
     RUN python -m pip install *.whl
+
+    SAVE IMAGE --push ampiato/fasterui-dev:$EARTHLY_GIT_SHORT_HASH
 
 openapi:
     FROM +build
@@ -43,5 +47,7 @@ code-quality:
 
 ci:
     ARG version
+
+    BUILD +build
 
     BUILD +code-quality --version $version

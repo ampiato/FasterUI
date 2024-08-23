@@ -9,10 +9,10 @@ spec:
   ingressClassName: nginx
   tls: 
   - hosts:
-    - fasterui.ampiato.com
+    - {{ .Release.Name }}.lab.ampiato.com
     secretName: {{ .Release.Name }}-production-cert
   rules:
-    - host: fasterui.ampiato.com
+    - host: {{ .Release.Name }}.lab.ampiato.com
       http:
         paths:
           - path: /api

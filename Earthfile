@@ -5,6 +5,7 @@ ci:
 
     BUILD ./python+ci --version $version
     BUILD ./component-library+ci --version $version
+    BUILD ./docs+ci --version $version
 
 
 artifacts:
