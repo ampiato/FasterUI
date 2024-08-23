@@ -32,13 +32,13 @@ image:
     RUN addgroup --system --gid 1001 nodejs
     RUN adduser --system --uid 1001 nextjs
 
-    COPY +build/public ./public
+    COPY (+build/public --platform=linux/arm64) ./public
 
     RUN mkdir .next
     RUN chown nextjs:nodejs .next
 
-    COPY +build/.next/standalone ./
-    COPY +build/.next/static ./.next/static
+    COPY (+build/.next/standalone --platform=linux/arm64) ./
+    COPY (+build/.next/static --platform=linux/arm64) ./.next/static
 
     USER nextjs
 
@@ -54,4 +54,4 @@ image:
 ci:
     ARG version
 
-    BUILD --platform=linux/arm64 --platform=linux/amd64 +image
+    BUILD --platform=linux/arm64 +image
