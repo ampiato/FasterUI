@@ -2,13 +2,54 @@ VERSION 0.8
 FROM node:latest
 WORKDIR /code
 
-netlify:
-    ENV NEXT_DISABLE_NETLIFY_EDGE=true
-    RUN npm install netlify-cli -g
 
 deps:
-    FROM +netlify
     COPY package.json .
     RUN npm install
     RUN npm install @netlify/plugin-nextjs --save-dev
     COPY . .
+
+
+build:
+    FROM +deps
+
+    ENV NEXT_TELEMETRY_DISABLED 1
+
+    RUN npm run build
+
+    SAVE ARTIFACT public
+    SAVE ARTIFACT .next
+
+
+image:
+    WORKDIR /app
+
+    ENV NODE_ENV production
+    ENV NEXT_TELEMETRY_DISABLED 1
+
+    RUN addgroup --system --gid 1001 nodejs
+    RUN adduser --system --uid 1001 nextjs
+
+    COPY +build/public ./public
+
+    RUN mkdir .next
+    RUN chown nextjs:nodejs .next
+
+    COPY +build/.next/standalone ./
+    COPY +build/.next/static ./.next/static
+
+    USER nextjs
+
+    ENV PORT 3000
+
+    CMD HOSTNAME="0.0.0.0" node server.js
+
+    SAVE IMAGE --push ampiato/fasterui-docs-dev:$EARTHLY_GIT_SHORT_HASH
+
+
+
+
+ci:
+    ARG version
+
+    BUILD --platform=linux/arm64 --platform=linux/amd64 +image

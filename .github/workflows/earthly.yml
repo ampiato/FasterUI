@@ -67,12 +67,4 @@ jobs:
         with:
           name: Build
           path: dist
-
-      - name: Build fasterui-docs image
-        uses: docker/build-push-action@v6
-        with:
-          context: docs
-          platforms: linux/amd64,linux/arm64
-          file: docs/Dockerfile
-          push: true
-          tags: ampiato/fasterui-docs${{ env.SUFFIX }}:${{ env.DOCKER_TAG }}
+          
