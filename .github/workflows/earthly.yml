@@ -72,3 +72,25 @@ jobs:
       - name: Run tests
         run: |
           earthly --push --ci +ci --version $RELEASE_VERSION
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [ earthly-amd64, earthly-arm ]
+    permissions:
+      contents: write
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Build metadata
+        run: |
+          ./deployment/github_env.sh
+
+      - name: Deploy Staging
+        run: |
+          mkdir -p ~/.kube
+          echo "$KUBERNETES_CONFIG" > ~/.kube/config
+
+          ./deployment/deploy_staging.sh $RELEASE_VERSION $SUFFIX
+
+        env:
+          KUBERNETES_CONFIG: ${{ secrets.KUBERNETES_CONFIG }}
