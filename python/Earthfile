@@ -48,6 +48,6 @@ code-quality:
 ci:
     ARG version
 
-    BUILD --platform=linux/arm64 --platform=linux/amd64 +build
+    BUILD +build
 
     BUILD +code-quality --version $version
