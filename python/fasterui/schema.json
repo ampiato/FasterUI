@@ -1,0 +1,724 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "Component",
+  "definitions": {
+    "Action": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": [
+            "navigate_to",
+            "open_modal",
+            "close_modal",
+            "submit_form",
+            "reset_form"
+          ]
+        },
+        "go_to_url": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "modal_component": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      },
+      "required": [
+        "action"
+      ],
+      "additionalProperties": false
+    },
+    "AmpiatoLogo": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "Button": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "action": {
+          "$ref": "#/definitions/Action"
+        },
+        "primary": {
+          "type": "boolean"
+        },
+        "size": {
+          "type": "string",
+          "enum": [
+            "small",
+            "medium",
+            "large"
+          ]
+        }
+      },
+      "required": [
+        "label"
+      ],
+      "additionalProperties": false
+    },
+    "ButtonGroupItem": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "action": {
+          "$ref": "#/definitions/Action"
+        },
+        "is_active": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "label"
+      ],
+      "additionalProperties": false
+    },
+    "ButtonGroup": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ButtonGroupItem"
+          }
+        },
+        "size": {
+          "type": "string",
+          "enum": [
+            "small",
+            "medium",
+            "large"
+          ]
+        }
+      },
+      "required": [
+        "items"
+      ],
+      "additionalProperties": false
+    },
+    "DatePicker": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "FlexBox": {
+      "type": "object",
+      "properties": {
+        "children": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "gap": {
+          "type": "integer"
+        },
+        "dir": {
+          "type": "string",
+          "enum": [
+            "horizontal",
+            "vertical"
+          ]
+        }
+      },
+      "required": [
+        "children"
+      ],
+      "additionalProperties": false
+    },
+    "Grid": {
+      "type": "object",
+      "properties": {
+        "children": {
+          "type": "array",
+          "items": {
+            "$ref": "#"
+          }
+        },
+        "cols": {
+          "type": "integer"
+        },
+        "gapX": {
+          "type": "integer"
+        },
+        "gapY": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "children"
+      ],
+      "additionalProperties": false
+    },
+    "IconName": {
+      "type": "string",
+      "enum": [
+        "AcademicCapIcon",
+        "AdjustmentsHorizontalIcon",
+        "AdjustmentsVerticalIcon",
+        "ArchiveBoxArrowDownIcon",
+        "ArchiveBoxXMarkIcon",
+        "ArchiveBoxIcon",
+        "ArrowDownCircleIcon",
+        "ArrowDownLeftIcon",
+        "ArrowDownOnSquareStackIcon",
+        "ArrowDownOnSquareIcon",
+        "ArrowDownRightIcon",
+        "ArrowDownTrayIcon",
+        "ArrowDownIcon",
+        "ArrowLeftCircleIcon",
+        "ArrowLeftEndOnRectangleIcon",
+        "ArrowLeftOnRectangleIcon",
+        "ArrowLeftStartOnRectangleIcon",
+        "ArrowLeftIcon",
+        "ArrowLongDownIcon",
+        "ArrowLongLeftIcon",
+        "ArrowLongRightIcon",
+        "ArrowLongUpIcon",
+        "ArrowPathRoundedSquareIcon",
+        "ArrowPathIcon",
+        "ArrowRightCircleIcon",
+        "ArrowRightEndOnRectangleIcon",
+        "ArrowRightOnRectangleIcon",
+        "ArrowRightStartOnRectangleIcon",
+        "ArrowRightIcon",
+        "ArrowSmallDownIcon",
+        "ArrowSmallLeftIcon",
+        "ArrowSmallRightIcon",
+        "ArrowSmallUpIcon",
+        "ArrowTopRightOnSquareIcon",
+        "ArrowTrendingDownIcon",
+        "ArrowTrendingUpIcon",
+        "ArrowTurnDownLeftIcon",
+        "ArrowTurnDownRightIcon",
+        "ArrowTurnLeftDownIcon",
+        "ArrowTurnLeftUpIcon",
+        "ArrowTurnRightDownIcon",
+        "ArrowTurnRightUpIcon",
+        "ArrowTurnUpLeftIcon",
+        "ArrowTurnUpRightIcon",
+        "ArrowUpCircleIcon",
+        "ArrowUpLeftIcon",
+        "ArrowUpOnSquareStackIcon",
+        "ArrowUpOnSquareIcon",
+        "ArrowUpRightIcon",
+        "ArrowUpTrayIcon",
+        "ArrowUpIcon",
+        "ArrowUturnDownIcon",
+        "ArrowUturnLeftIcon",
+        "ArrowUturnRightIcon",
+        "ArrowUturnUpIcon",
+        "ArrowsPointingInIcon",
+        "ArrowsPointingOutIcon",
+        "ArrowsRightLeftIcon",
+        "ArrowsUpDownIcon",
+        "AtSymbolIcon",
+        "BackspaceIcon",
+        "BackwardIcon",
+        "BanknotesIcon",
+        "Bars2Icon",
+        "Bars3BottomLeftIcon",
+        "Bars3BottomRightIcon",
+        "Bars3CenterLeftIcon",
+        "Bars3Icon",
+        "Bars4Icon",
+        "BarsArrowDownIcon",
+        "BarsArrowUpIcon",
+        "Battery0Icon",
+        "Battery100Icon",
+        "Battery50Icon",
+        "BeakerIcon",
+        "BellAlertIcon",
+        "BellSlashIcon",
+        "BellSnoozeIcon",
+        "BellIcon",
+        "BoldIcon",
+        "BoltSlashIcon",
+        "BoltIcon",
+        "BookOpenIcon",
+        "BookmarkSlashIcon",
+        "BookmarkSquareIcon",
+        "BookmarkIcon",
+        "BriefcaseIcon",
+        "BugAntIcon",
+        "BuildingLibraryIcon",
+        "BuildingOffice2Icon",
+        "BuildingOfficeIcon",
+        "BuildingStorefrontIcon",
+        "CakeIcon",
+        "CalculatorIcon",
+        "CalendarDateRangeIcon",
+        "CalendarDaysIcon",
+        "CalendarIcon",
+        "CameraIcon",
+        "ChartBarSquareIcon",
+        "ChartBarIcon",
+        "ChartPieIcon",
+        "ChatBubbleBottomCenterTextIcon",
+        "ChatBubbleBottomCenterIcon",
+        "ChatBubbleLeftEllipsisIcon",
+        "ChatBubbleLeftRightIcon",
+        "ChatBubbleLeftIcon",
+        "ChatBubbleOvalLeftEllipsisIcon",
+        "ChatBubbleOvalLeftIcon",
+        "CheckBadgeIcon",
+        "CheckCircleIcon",
+        "CheckIcon",
+        "ChevronDoubleDownIcon",
+        "ChevronDoubleLeftIcon",
+        "ChevronDoubleRightIcon",
+        "ChevronDoubleUpIcon",
+        "ChevronDownIcon",
+        "ChevronLeftIcon",
+        "ChevronRightIcon",
+        "ChevronUpDownIcon",
+        "ChevronUpIcon",
+        "CircleStackIcon",
+        "ClipboardDocumentCheckIcon",
+        "ClipboardDocumentListIcon",
+        "ClipboardDocumentIcon",
+        "ClipboardIcon",
+        "ClockIcon",
+        "CloudArrowDownIcon",
+        "CloudArrowUpIcon",
+        "CloudIcon",
+        "CodeBracketSquareIcon",
+        "CodeBracketIcon",
+        "Cog6ToothIcon",
+        "Cog8ToothIcon",
+        "CogIcon",
+        "CommandLineIcon",
+        "ComputerDesktopIcon",
+        "CpuChipIcon",
+        "CreditCardIcon",
+        "CubeTransparentIcon",
+        "CubeIcon",
+        "CurrencyBangladeshiIcon",
+        "CurrencyDollarIcon",
+        "CurrencyEuroIcon",
+        "CurrencyPoundIcon",
+        "CurrencyRupeeIcon",
+        "CurrencyYenIcon",
+        "CursorArrowRaysIcon",
+        "CursorArrowRippleIcon",
+        "DevicePhoneMobileIcon",
+        "DeviceTabletIcon",
+        "DivideIcon",
+        "DocumentArrowDownIcon",
+        "DocumentArrowUpIcon",
+        "DocumentChartBarIcon",
+        "DocumentCheckIcon",
+        "DocumentCurrencyBangladeshiIcon",
+        "DocumentCurrencyDollarIcon",
+        "DocumentCurrencyEuroIcon",
+        "DocumentCurrencyPoundIcon",
+        "DocumentCurrencyRupeeIcon",
+        "DocumentCurrencyYenIcon",
+        "DocumentDuplicateIcon",
+        "DocumentMagnifyingGlassIcon",
+        "DocumentMinusIcon",
+        "DocumentPlusIcon",
+        "DocumentTextIcon",
+        "DocumentIcon",
+        "EllipsisHorizontalCircleIcon",
+        "EllipsisHorizontalIcon",
+        "EllipsisVerticalIcon",
+        "EnvelopeOpenIcon",
+        "EnvelopeIcon",
+        "EqualsIcon",
+        "ExclamationCircleIcon",
+        "ExclamationTriangleIcon",
+        "EyeDropperIcon",
+        "EyeSlashIcon",
+        "EyeIcon",
+        "FaceFrownIcon",
+        "FaceSmileIcon",
+        "FilmIcon",
+        "FingerPrintIcon",
+        "FireIcon",
+        "FlagIcon",
+        "FolderArrowDownIcon",
+        "FolderMinusIcon",
+        "FolderOpenIcon",
+        "FolderPlusIcon",
+        "FolderIcon",
+        "ForwardIcon",
+        "FunnelIcon",
+        "GifIcon",
+        "GiftTopIcon",
+        "GiftIcon",
+        "GlobeAltIcon",
+        "GlobeAmericasIcon",
+        "GlobeAsiaAustraliaIcon",
+        "GlobeEuropeAfricaIcon",
+        "H1Icon",
+        "H2Icon",
+        "H3Icon",
+        "HandRaisedIcon",
+        "HandThumbDownIcon",
+        "HandThumbUpIcon",
+        "HashtagIcon",
+        "HeartIcon",
+        "HomeModernIcon",
+        "HomeIcon",
+        "IdentificationIcon",
+        "InboxArrowDownIcon",
+        "InboxStackIcon",
+        "InboxIcon",
+        "InformationCircleIcon",
+        "ItalicIcon",
+        "KeyIcon",
+        "LanguageIcon",
+        "LifebuoyIcon",
+        "LightBulbIcon",
+        "LinkSlashIcon",
+        "LinkIcon",
+        "ListBulletIcon",
+        "LockClosedIcon",
+        "LockOpenIcon",
+        "MagnifyingGlassCircleIcon",
+        "MagnifyingGlassMinusIcon",
+        "MagnifyingGlassPlusIcon",
+        "MagnifyingGlassIcon",
+        "MapPinIcon",
+        "MapIcon",
+        "MegaphoneIcon",
+        "MicrophoneIcon",
+        "MinusCircleIcon",
+        "MinusSmallIcon",
+        "MinusIcon",
+        "MoonIcon",
+        "MusicalNoteIcon",
+        "NewspaperIcon",
+        "NoSymbolIcon",
+        "NumberedListIcon",
+        "PaintBrushIcon",
+        "PaperAirplaneIcon",
+        "PaperClipIcon",
+        "PauseCircleIcon",
+        "PauseIcon",
+        "PencilSquareIcon",
+        "PencilIcon",
+        "PercentBadgeIcon",
+        "PhoneArrowDownLeftIcon",
+        "PhoneArrowUpRightIcon",
+        "PhoneXMarkIcon",
+        "PhoneIcon",
+        "PhotoIcon",
+        "PlayCircleIcon",
+        "PlayPauseIcon",
+        "PlayIcon",
+        "PlusCircleIcon",
+        "PlusSmallIcon",
+        "PlusIcon",
+        "PowerIcon",
+        "PresentationChartBarIcon",
+        "PresentationChartLineIcon",
+        "PrinterIcon",
+        "PuzzlePieceIcon",
+        "QrCodeIcon",
+        "QuestionMarkCircleIcon",
+        "QueueListIcon",
+        "RadioIcon",
+        "ReceiptPercentIcon",
+        "ReceiptRefundIcon",
+        "RectangleGroupIcon",
+        "RectangleStackIcon",
+        "RocketLaunchIcon",
+        "RssIcon",
+        "ScaleIcon",
+        "ScissorsIcon",
+        "ServerStackIcon",
+        "ServerIcon",
+        "ShareIcon",
+        "ShieldCheckIcon",
+        "ShieldExclamationIcon",
+        "ShoppingBagIcon",
+        "ShoppingCartIcon",
+        "SignalSlashIcon",
+        "SignalIcon",
+        "SlashIcon",
+        "SparklesIcon",
+        "SpeakerWaveIcon",
+        "SpeakerXMarkIcon",
+        "Square2StackIcon",
+        "Square3Stack3DIcon",
+        "Squares2X2Icon",
+        "SquaresPlusIcon",
+        "StarIcon",
+        "StopCircleIcon",
+        "StopIcon",
+        "StrikethroughIcon",
+        "SunIcon",
+        "SwatchIcon",
+        "TableCellsIcon",
+        "TagIcon",
+        "TicketIcon",
+        "TrashIcon",
+        "TrophyIcon",
+        "TruckIcon",
+        "TvIcon",
+        "UnderlineIcon",
+        "UserCircleIcon",
+        "UserGroupIcon",
+        "UserMinusIcon",
+        "UserPlusIcon",
+        "UserIcon",
+        "UsersIcon",
+        "VariableIcon",
+        "VideoCameraSlashIcon",
+        "VideoCameraIcon",
+        "ViewColumnsIcon",
+        "ViewfinderCircleIcon",
+        "WalletIcon",
+        "WifiIcon",
+        "WindowIcon",
+        "WrenchScrewdriverIcon",
+        "WrenchIcon",
+        "XCircleIcon",
+        "XMarkIcon"
+      ]
+    },
+    "Icon": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/IconName"
+        },
+        "size": {
+          "type": "string",
+          "enum": [
+            "small",
+            "medium",
+            "large"
+          ]
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "additionalProperties": false
+    },
+    "Markdown": {
+      "type": "object",
+      "properties": {
+        "markdown": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PropertyCard": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "key_value_pairs": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "minItems": 2,
+            "maxItems": 2
+          }
+        },
+        "condensed": {
+          "type": "boolean"
+        },
+        "is_active": {
+          "type": "boolean"
+        },
+        "action": {
+          "$ref": "#/definitions/Action"
+        }
+      },
+      "required": [
+        "title"
+      ],
+      "additionalProperties": false
+    },
+    "SectionHeader": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "subtitle": {
+          "type": "string"
+        },
+        "size": {
+          "type": "string",
+          "enum": [
+            "small",
+            "medium",
+            "large"
+          ]
+        },
+        "children": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": true
+        }
+      },
+      "required": [
+        "title"
+      ],
+      "additionalProperties": false
+    },
+    "TableCell": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "bold": {
+          "type": "boolean"
+        },
+        "italic": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "additionalProperties": false
+    },
+    "Table": {
+      "type": "object",
+      "properties": {
+        "columns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": [
+              {
+                "type": "string"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "columns",
+        "data"
+      ],
+      "additionalProperties": false
+    },
+    "Page": {
+      "type": "object",
+      "properties": {
+        "children": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "sidebar": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": true
+        }
+      },
+      "required": [
+        "children"
+      ],
+      "additionalProperties": false
+    },
+    "Sidebar": {
+      "type": "object",
+      "properties": {
+        "children": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "last_component_sticks_to_bottom": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "children"
+      ],
+      "additionalProperties": false
+    },
+    "NavigationSection": {
+      "type": "object",
+      "properties": {
+        "children": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "title": {
+          "type": "string"
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "NavigationButton": {
+      "type": "object",
+      "properties": {
+        "icon": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "action": {
+          "$ref": "#/definitions/Action"
+        },
+        "is_active": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "icon",
+        "label"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "AmpiatoLogo": {
+          "$ref": "#/definitions/AmpiatoLogo"
+        }
+      },
+      "additionalProperties": false
+    }
+  ],
+  "additionalProperties": false
+}

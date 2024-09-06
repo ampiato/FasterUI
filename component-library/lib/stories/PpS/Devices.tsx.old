@@ -5,7 +5,7 @@ import { PropertyCard } from "../Components/PropertyCard"
 import { SectionHeader } from "../Components/SectionHeader"
 import { Table } from "../Components/Table"
 import { Page } from "../Layout/Page"
-import { MenuProps, Sidebar } from "../Layout/Sidebar"
+import { Sidebar } from "../Layout/Sidebar"
 
 let navigation: MenuProps[] = [
   { name: 'Zařízení', href: '#', icon: "HomeIcon", current: true },

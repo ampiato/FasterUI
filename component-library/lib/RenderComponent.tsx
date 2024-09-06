@@ -15,11 +15,30 @@ import { SectionHeader } from "./stories/Components/SectionHeader";
 import { Sidebar } from "./stories/Layout";
 import { Table } from "./stories/Components/Table";
 
+import { createContext } from 'react';
+import { AmpiatoLogo } from "./stories/Ampiato/AmpiatoLogo";
+
+
+export interface Options {
+  staticPrefix?: string
+}
+
+export const OptionsContext = createContext<Options>({});
 
 interface Props {
   c: Component | Component[] | undefined
+  options?: Options
 }
-export const RenderComponent: React.FC<Props> = ({ c }) => {
+export const RenderComponentWraper: React.FC<Props> = ({ c, options }) => {
+  return (
+    <OptionsContext.Provider value={options || {}}>
+      <RenderComponent c={c} />
+    </OptionsContext.Provider>
+  )
+}
+
+
+export const RenderComponent = ({ c }: { c: Props["c"] }) => {
   if (c === undefined) {
     return undefined
   }
@@ -27,6 +46,8 @@ export const RenderComponent: React.FC<Props> = ({ c }) => {
     return <>{c.map(c_item => <RenderComponent c={c_item} />)}</>
   }
   switch (c.componentType) {
+    case "AmpiatoLogo":
+      return <AmpiatoLogo {...c} />
     case "Button":
       return <Button {...c} />
     case "ButtonGroup":

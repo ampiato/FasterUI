@@ -1,7 +1,8 @@
 .openapi-generator-ignore
-apis/DefaultApi.ts
+apis/ExamplesApi.ts
 apis/index.ts
 index.ts
+models/AmpiatoLogo.ts
 models/Button.ts
 models/ButtonGroup.ts
 models/ButtonGroupItem.ts
@@ -19,5 +20,6 @@ models/PropertyCard.ts
 models/SectionHeader.ts
 models/Sidebar.ts
 models/Table.ts
+models/TableDataInnerInner.ts
 models/index.ts
 runtime.ts

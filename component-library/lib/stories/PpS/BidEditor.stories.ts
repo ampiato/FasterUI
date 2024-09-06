@@ -6,7 +6,7 @@ const meta = {
   title: 'PpS/BidEditor',
   component: BidEditor,
   parameters: {
-    layout: 'centered',
+    layout: 'fullscreen',
   },
   tags: ['autodocs'],
   argTypes: {

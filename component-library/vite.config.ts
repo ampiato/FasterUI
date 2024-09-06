@@ -3,7 +3,8 @@ import { resolve } from 'path';
 import react from '@vitejs/plugin-react';
 import dts from 'vite-plugin-dts';
 import tailwindcss from 'tailwindcss';
-import pkg from './package.json' assert { type: 'json' };
+import pkg from './package.json' with { type: 'json' };
+import process from 'process';
 
 export default defineConfig({
   plugins: [
@@ -12,19 +13,25 @@ export default defineConfig({
       rollupTypes: true,
     }),
   ],
+  define: {
+    'process.env': process.env
+  },
   build: {
     lib: {
       entry: resolve(__dirname, 'lib/main.ts'),
-      formats: ['es'],
+      formats: ['umd'], // or 'iife'
+      fileName: (format) => `fasterui.${format}.js`,
+      name: "fasterui"
     },
     rollupOptions: {
-      external: [...Object.keys(pkg.peerDependencies || {})],
-      output: {
-        globals: {
-          react: 'React',
-          'react-dom': 'ReactDOM',
-        },
-      },
+      // external: [...Object.keys(pkg.dependencies || {})],
+      // external: ['react', 'react-dom'],
+      // output: {
+      //   globals: {
+      //     react: 'React',
+      //     'react-dom': 'ReactDOM',
+      //   },
+      // },
     },
     sourcemap: true,
   },

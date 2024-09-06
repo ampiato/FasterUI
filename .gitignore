@@ -1,2 +1,6 @@
-# Local Netlify folder
-.netlify
+.venv
+dist
+
+schema/jsonschema-draft-07.json
+schema/schema.json
+schema/test.d.ts
